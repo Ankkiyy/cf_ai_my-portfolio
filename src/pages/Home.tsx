@@ -1,6 +1,7 @@
 
 import { Shield, Lock, Eye, Zap } from 'lucide-react';
 import CyberAnimation from '../components/CyberAnimation';
+import ContainedLoader from '../components/ContainedLoader';
 
 const Home = () => {
   const features = [
@@ -27,8 +28,11 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <div className="pt-16">
+    <div className="min-h-screen bg-background text-foreground relative">
+      {/* Full page particle animation */}
+      <CyberAnimation />
+      
+      <div className="pt-16 relative z-10">
         {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center px-4">
           <div className="max-w-6xl mx-auto">
@@ -73,16 +77,16 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* Right side - Animation */}
+              {/* Right side - Contained Animation */}
               <div className="relative h-96 lg:h-[500px] rounded-lg overflow-hidden border border-border bg-card">
-                <CyberAnimation />
+                <ContainedLoader />
               </div>
             </div>
           </div>
         </section>
 
         {/* Services Section */}
-        <section className="py-20 px-4">
+        <section className="py-20 px-4 relative">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16">Core Expertise</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

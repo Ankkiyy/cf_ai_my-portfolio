@@ -12,144 +12,51 @@ const CyberAnimation = () => {
     if (!ctx) return;
 
     const resizeCanvas = () => {
-      const parent = canvas.parentElement;
-      if (parent) {
-        canvas.width = parent.offsetWidth;
-        canvas.height = parent.offsetHeight;
-      }
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Enhanced 3D Loader Configuration
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const baseRadius = Math.min(canvas.width, canvas.height) / 4;
-    
-    // Multiple rotating rings with enhanced properties
-    const rings = [
-      { radius: baseRadius * 0.5, speed: 0.03, thickness: 4, alpha: 1, segments: 6, gap: Math.PI / 3 },
-      { radius: baseRadius * 0.7, speed: -0.025, thickness: 3, alpha: 0.8, segments: 8, gap: Math.PI / 4 },
-      { radius: baseRadius * 0.9, speed: 0.02, thickness: 5, alpha: 0.6, segments: 12, gap: Math.PI / 6 },
-      { radius: baseRadius * 1.1, speed: -0.015, thickness: 2, alpha: 0.4, segments: 16, gap: Math.PI / 8 },
-    ];
-
-    // Enhanced orbiting particles
-    const particles = [];
-    for (let i = 0; i < 16; i++) {
-      particles.push({
-        angle: (i / 16) * Math.PI * 2,
-        radius: baseRadius * (0.3 + (i % 3) * 0.15),
-        speed: 0.02 + (i % 3) * 0.01,
-        size: Math.random() * 2 + 1.5,
-        alpha: Math.random() * 0.4 + 0.6,
+    // Free-floating particles across entire page
+    const freeParticles = [];
+    for (let i = 0; i < 25; i++) {
+      freeParticles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        speedX: (Math.random() - 0.5) * 0.8,
+        speedY: (Math.random() - 0.5) * 0.8,
+        size: Math.random() * 2 + 1,
+        alpha: Math.random() * 0.6 + 0.3,
+        pulse: Math.random() * Math.PI * 2,
         trail: []
       });
     }
 
-    // Floating energy orbs
-    const energyOrbs = [];
-    for (let i = 0; i < 8; i++) {
-      energyOrbs.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 15 + 5,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5,
-        alpha: Math.random() * 0.3 + 0.1,
-        pulse: Math.random() * Math.PI * 2
-      });
-    }
-
-    let rotation = 0;
     let time = 0;
     let animationId: number;
 
     const animate = () => {
-      // Clear canvas with enhanced fade effect
-      ctx.fillStyle = 'rgba(8, 8, 8, 0.15)';
+      // Clear canvas with fade effect
+      ctx.fillStyle = 'rgba(8, 8, 8, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      rotation += 0.008;
       time += 0.02;
 
-      // Draw floating energy orbs
-      energyOrbs.forEach((orb) => {
-        orb.x += orb.speedX;
-        orb.y += orb.speedY;
-        orb.pulse += 0.05;
+      // Draw free-floating particles
+      freeParticles.forEach((particle) => {
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+        particle.pulse += 0.03;
 
         // Bounce off edges
-        if (orb.x < 0 || orb.x > canvas.width) orb.speedX *= -1;
-        if (orb.y < 0 || orb.y > canvas.height) orb.speedY *= -1;
+        if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
 
-        const pulsedRadius = orb.radius + Math.sin(orb.pulse) * 3;
-        const pulsedAlpha = orb.alpha + Math.sin(orb.pulse) * 0.1;
-
-        // Create energy orb gradient
-        const orbGradient = ctx.createRadialGradient(
-          orb.x, orb.y, 0,
-          orb.x, orb.y, pulsedRadius * 2
-        );
-        orbGradient.addColorStop(0, `rgba(220, 38, 38, ${pulsedAlpha})`);
-        orbGradient.addColorStop(0.5, `rgba(220, 38, 38, ${pulsedAlpha * 0.3})`);
-        orbGradient.addColorStop(1, `rgba(220, 38, 38, 0)`);
-
-        ctx.beginPath();
-        ctx.arc(orb.x, orb.y, pulsedRadius, 0, Math.PI * 2);
-        ctx.fillStyle = orbGradient;
-        ctx.fill();
-      });
-
-      // Draw enhanced rotating rings
-      rings.forEach((ring, index) => {
-        const currentRotation = rotation * ring.speed + (index * Math.PI / 4);
-        
-        // Create enhanced gradient for 3D depth effect
-        const gradient = ctx.createRadialGradient(
-          centerX, centerY, ring.radius - 30,
-          centerX, centerY, ring.radius + 30
-        );
-        gradient.addColorStop(0, `rgba(220, 38, 38, 0)`);
-        gradient.addColorStop(0.3, `rgba(255, 60, 60, ${ring.alpha * 0.8})`);
-        gradient.addColorStop(0.7, `rgba(220, 38, 38, ${ring.alpha})`);
-        gradient.addColorStop(1, `rgba(160, 20, 20, 0)`);
-
-        // Draw segmented ring with breathing effect
-        const breathe = Math.sin(time + index) * 0.1 + 1;
-        const adjustedRadius = ring.radius * breathe;
-        
-        for (let i = 0; i < ring.segments; i++) {
-          const startAngle = currentRotation + (i / ring.segments) * Math.PI * 2;
-          const endAngle = startAngle + (Math.PI * 2 / ring.segments) - ring.gap;
-          
-          ctx.beginPath();
-          ctx.arc(centerX, centerY, adjustedRadius, startAngle, endAngle);
-          ctx.lineWidth = ring.thickness * breathe;
-          ctx.strokeStyle = gradient;
-          ctx.lineCap = 'round';
-          ctx.stroke();
-
-          // Add inner glow
-          ctx.beginPath();
-          ctx.arc(centerX, centerY, adjustedRadius, startAngle, endAngle);
-          ctx.lineWidth = ring.thickness * 0.3;
-          ctx.strokeStyle = `rgba(255, 100, 100, ${ring.alpha * 0.8})`;
-          ctx.stroke();
-        }
-      });
-
-      // Draw enhanced orbiting particles with trails
-      particles.forEach((particle, index) => {
-        particle.angle += particle.speed;
-        
-        const x = centerX + Math.cos(particle.angle) * particle.radius;
-        const y = centerY + Math.sin(particle.angle) * particle.radius;
-        
         // Update trail
-        particle.trail.push({ x, y });
-        if (particle.trail.length > 8) {
+        particle.trail.push({ x: particle.x, y: particle.y });
+        if (particle.trail.length > 6) {
           particle.trail.shift();
         }
 
@@ -160,91 +67,55 @@ const CyberAnimation = () => {
           for (let i = 1; i < particle.trail.length; i++) {
             ctx.lineTo(particle.trail[i].x, particle.trail[i].y);
           }
-          ctx.strokeStyle = `rgba(220, 38, 38, ${particle.alpha * 0.3})`;
-          ctx.lineWidth = particle.size * 0.5;
+          ctx.strokeStyle = `rgba(220, 38, 38, ${particle.alpha * 0.2})`;
+          ctx.lineWidth = particle.size * 0.3;
           ctx.lineCap = 'round';
           ctx.stroke();
         }
-        
-        // Create enhanced glowing effect
-        const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, particle.size * 4);
-        glowGradient.addColorStop(0, `rgba(255, 80, 80, ${particle.alpha})`);
-        glowGradient.addColorStop(0.3, `rgba(220, 38, 38, ${particle.alpha * 0.7})`);
-        glowGradient.addColorStop(0.7, `rgba(220, 38, 38, ${particle.alpha * 0.3})`);
+
+        const pulseSize = particle.size + Math.sin(particle.pulse) * 0.3;
+        const pulseAlpha = particle.alpha + Math.sin(particle.pulse) * 0.1;
+
+        // Create glowing effect
+        const glowGradient = ctx.createRadialGradient(
+          particle.x, particle.y, 0,
+          particle.x, particle.y, pulseSize * 3
+        );
+        glowGradient.addColorStop(0, `rgba(255, 80, 80, ${pulseAlpha})`);
+        glowGradient.addColorStop(0.5, `rgba(220, 38, 38, ${pulseAlpha * 0.5})`);
         glowGradient.addColorStop(1, `rgba(220, 38, 38, 0)`);
-        
+
         // Draw outer glow
         ctx.beginPath();
-        ctx.arc(x, y, particle.size * 4, 0, Math.PI * 2);
+        ctx.arc(particle.x, particle.y, pulseSize * 2, 0, Math.PI * 2);
         ctx.fillStyle = glowGradient;
         ctx.fill();
-        
-        // Draw core particle with pulse
-        const pulseSize = particle.size + Math.sin(time * 3 + index) * 0.5;
-        ctx.beginPath();
-        ctx.arc(x, y, pulseSize, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 120, 120, ${particle.alpha})`;
-        ctx.fill();
 
-        // Inner bright core
+        // Draw core particle
         ctx.beginPath();
-        ctx.arc(x, y, pulseSize * 0.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 200, 200, ${particle.alpha})`;
+        ctx.arc(particle.x, particle.y, pulseSize, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 120, 120, ${pulseAlpha})`;
         ctx.fill();
       });
 
-      // Draw enhanced central core with multi-layered pulsing
-      const pulseSize = 12 + Math.sin(time * 4) * 4;
-      const secondaryPulse = 8 + Math.sin(time * 6) * 2;
-      
-      // Outer core glow
-      const coreGradient = ctx.createRadialGradient(
-        centerX, centerY, 0,
-        centerX, centerY, pulseSize * 3
-      );
-      coreGradient.addColorStop(0, 'rgba(255, 150, 150, 1)');
-      coreGradient.addColorStop(0.2, 'rgba(220, 38, 38, 0.9)');
-      coreGradient.addColorStop(0.5, 'rgba(220, 38, 38, 0.5)');
-      coreGradient.addColorStop(1, 'rgba(220, 38, 38, 0)');
-      
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, pulseSize * 2, 0, Math.PI * 2);
-      ctx.fillStyle = coreGradient;
-      ctx.fill();
-
-      // Main core
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, pulseSize, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 100, 100, 0.9)`;
-      ctx.fill();
-
-      // Inner core
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, secondaryPulse, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 200, 200, 1)`;
-      ctx.fill();
-
-      // Draw dynamic connection web
-      for (let i = 0; i < particles.length; i++) {
-        const particle1 = particles[i];
-        for (let j = i + 1; j < particles.length; j++) {
-          const particle2 = particles[j];
+      // Draw connection lines between nearby particles
+      for (let i = 0; i < freeParticles.length; i++) {
+        const particle1 = freeParticles[i];
+        for (let j = i + 1; j < freeParticles.length; j++) {
+          const particle2 = freeParticles[j];
           
-          const x1 = centerX + Math.cos(particle1.angle) * particle1.radius;
-          const y1 = centerY + Math.sin(particle1.angle) * particle1.radius;
-          const x2 = centerX + Math.cos(particle2.angle) * particle2.radius;
-          const y2 = centerY + Math.sin(particle2.angle) * particle2.radius;
-          
-          const distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-          const maxDistance = baseRadius * 0.8;
+          const distance = Math.sqrt(
+            (particle2.x - particle1.x) ** 2 + (particle2.y - particle1.y) ** 2
+          );
+          const maxDistance = 150;
           
           if (distance < maxDistance) {
-            const opacity = (1 - distance / maxDistance) * 0.15;
+            const opacity = (1 - distance / maxDistance) * 0.1;
             ctx.beginPath();
-            ctx.moveTo(x1, y1);
-            ctx.lineTo(x2, y2);
+            ctx.moveTo(particle1.x, particle1.y);
+            ctx.lineTo(particle2.x, particle2.y);
             ctx.strokeStyle = `rgba(220, 38, 38, ${opacity})`;
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
@@ -264,9 +135,9 @@ const CyberAnimation = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full"
+      className="fixed inset-0 w-full h-full pointer-events-none z-0"
       style={{ 
-        background: 'radial-gradient(circle at center, rgba(220, 38, 38, 0.08) 0%, rgba(8, 8, 8, 0.95) 70%, rgba(0, 0, 0, 1) 100%)' 
+        background: 'transparent'
       }}
     />
   );
