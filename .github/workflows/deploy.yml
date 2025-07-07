@@ -1,0 +1,91 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Install sshpass
+        run: sudo apt-get install sshpass
+
+      - name: Deploy to Server via SSH
+        env:
+          SSH_USER: ${{ secrets.SERVER_USER }}
+          SSH_HOST: ${{ secrets.SERVER }}
+          SSH_PASS: ${{ secrets.SERVER_PASSWORD }}
+          SSH_PORT: ${{ secrets.SERVER_PORT }}
+        run: |
+          echo "Deploying via sshpass..."
+          if ! sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "rm -rf domains/ecoganeshaarts.com/public_html/assets"; then
+            echo "Failed to remove assets folder"
+            exit 1
+          fi
+          if ! sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "cd domains/ecoganeshaarts.com/public_html && find . -maxdepth 1 ! -name 'upload' ! -name '.' -exec rm -rf {} +"; then
+            echo "Failed to remove existing files"
+            exit 1
+          fi
+          if ! sshpass -p "$SSH_PASS" scp -P $SSH_PORT -o StrictHostKeyChecking=no -r dist/. $SSH_USER@$SSH_HOST:domains/ecoganeshaarts.com/public_html/; then
+            echo "Failed to upload new files"
+            exit 1
+          fi
+          echo "Deployment completed successfully"
+
+      - name: Get Last Commit Info
+        id: commit_info
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=format:'%s')
+          COMMITTER_NAME=$(git log -1 --pretty=format:'%an')
+          ESCAPED_COMMIT_MESSAGE=$(echo "${{ env.commit_message }}" | sed 's/"/\\"/g')
+          echo "commit_message=$COMMIT_MESSAGE" >> $GITHUB_ENV
+          echo "committer_name=$COMMITTER_NAME" >> $GITHUB_ENV
+          
+      - name: Notify Discord
+        run: |
+          
+          MESSAGE="✅ **Deployment Successful**
+
+          > 🔗 **From:** Frontend
+          > 🖥️ **Environment:** Production  
+          > 📅 **Time:** $(date)
+          > 👤 **Commit By:** \`${{ env.committer_name }}\`
+
+          📝 **Last Commit Message:**  
+          \`\`\`
+          ${{ env.commit_message }}
+          \`\`\`
+
+          =========================="
+
+          curl -X POST "$DISCORD_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "$(jq -n --arg content "$MESSAGE" '{content: $content}')"
+        env:
+          DISCORD_WEBHOOK_URL: ${{ vars.DISCORD_WEBHOOK_URL }}
