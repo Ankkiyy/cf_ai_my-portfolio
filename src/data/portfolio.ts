@@ -321,7 +321,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     duration: "2 hours",
     image:
-      "https://images.unsplash.com/photo-1631049303454-3b4d9cb5836f?w=800&h=600&fit=crop",
+      "https://wallpapers.com/images/hd/spotify-piano-and-headphones-psvd4nwl5u4foka8.jpg",
   },
   {
     id: "2",
