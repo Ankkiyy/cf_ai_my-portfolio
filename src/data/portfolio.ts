@@ -273,7 +273,7 @@ export const projects: Project[] = [
     ],
     category: "UI Library",
     image:
-      "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?w=800&h=600&fit=crop",
+      "https://avatars.githubusercontent.com/u/166878038?s=200&v=4",
   },
   {
     id: "11",
