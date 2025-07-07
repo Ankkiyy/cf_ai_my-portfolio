@@ -27,51 +27,55 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Background Animation */}
-      <CyberAnimation />
-      
-      {/* Content */}
-      <div className="relative z-10 pt-16">
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="pt-16">
         {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-8">
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-red-400 to-primary bg-clip-text text-transparent animate-cyber-pulse">
-                Cybersecurity Engineer
-              </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Protecting digital assets through advanced security engineering, 
-                threat detection, and strategic defense implementations.
-              </p>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <button className="px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors cyber-glow">
-                View Projects
-              </button>
-              <button className="px-8 py-3 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-colors">
-                Download Resume
-              </button>
-            </div>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Left side - Content */}
+              <div className="text-center lg:text-left">
+                <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-red-400 to-primary bg-clip-text text-transparent">
+                  Cybersecurity Engineer
+                </h1>
+                <p className="text-xl text-muted-foreground mb-8">
+                  Protecting digital assets through advanced security engineering, 
+                  threat detection, and strategic defense implementations.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
+                  <button className="px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors cyber-glow">
+                    View Projects
+                  </button>
+                  <button className="px-8 py-3 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-colors">
+                    Download Resume
+                  </button>
+                </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">50+</div>
-                <div className="text-sm text-muted-foreground">Security Audits</div>
+                {/* Stats */}
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="text-center lg:text-left">
+                    <div className="text-3xl font-bold text-primary mb-2">50+</div>
+                    <div className="text-sm text-muted-foreground">Security Audits</div>
+                  </div>
+                  <div className="text-center lg:text-left">
+                    <div className="text-3xl font-bold text-primary mb-2">99.9%</div>
+                    <div className="text-sm text-muted-foreground">Uptime Achieved</div>
+                  </div>
+                  <div className="text-center lg:text-left">
+                    <div className="text-3xl font-bold text-primary mb-2">$50M+</div>
+                    <div className="text-sm text-muted-foreground">Breaches Prevented</div>
+                  </div>
+                  <div className="text-center lg:text-left">
+                    <div className="text-3xl font-bold text-primary mb-2">24/7</div>
+                    <div className="text-sm text-muted-foreground">Threat Monitoring</div>
+                  </div>
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">99.9%</div>
-                <div className="text-sm text-muted-foreground">Uptime Achieved</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">$50M+</div>
-                <div className="text-sm text-muted-foreground">Breaches Prevented</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">24/7</div>
-                <div className="text-sm text-muted-foreground">Threat Monitoring</div>
+
+              {/* Right side - Animation */}
+              <div className="relative h-96 lg:h-[500px] rounded-lg overflow-hidden border border-border bg-card">
+                <CyberAnimation />
               </div>
             </div>
           </div>

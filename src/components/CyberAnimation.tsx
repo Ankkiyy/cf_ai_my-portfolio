@@ -12,8 +12,11 @@ const CyberAnimation = () => {
     if (!ctx) return;
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const parent = canvas.parentElement;
+      if (parent) {
+        canvas.width = parent.offsetWidth;
+        canvas.height = parent.offsetHeight;
+      }
     };
 
     resizeCanvas();
@@ -22,12 +25,12 @@ const CyberAnimation = () => {
     // Matrix rain effect
     const matrix = "01";
     const matrixArray = matrix.split("");
-    const fontSize = 14;
+    const fontSize = 12;
     const columns = canvas.width / fontSize;
     const drops: number[] = [];
 
     for (let x = 0; x < columns; x++) {
-      drops[x] = 1;
+      drops[x] = Math.random() * canvas.height / fontSize;
     }
 
     // Floating nodes
@@ -37,21 +40,19 @@ const CyberAnimation = () => {
       vx: number;
       vy: number;
       size: number;
-      connections: Node[];
     }
 
     const nodes: Node[] = [];
-    const nodeCount = 50;
+    const nodeCount = 25;
 
     // Create nodes
     for (let i = 0; i < nodeCount; i++) {
       nodes.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 3 + 1,
-        connections: []
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 2 + 1
       });
     }
 
@@ -59,7 +60,7 @@ const CyberAnimation = () => {
 
     const animate = () => {
       // Semi-transparent background for trail effect
-      ctx.fillStyle = 'rgba(20, 20, 20, 0.05)';
+      ctx.fillStyle = 'rgba(12, 12, 12, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Matrix rain
@@ -98,11 +99,11 @@ const CyberAnimation = () => {
             Math.pow(node.x - otherNode.x, 2) + Math.pow(node.y - otherNode.y, 2)
           );
 
-          if (distance < 150) {
+          if (distance < 100) {
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             ctx.lineTo(otherNode.x, otherNode.y);
-            ctx.strokeStyle = `rgba(220, 38, 38, ${0.3 - distance / 500})`;
+            ctx.strokeStyle = `rgba(220, 38, 38, ${0.2 - distance / 500})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -124,7 +125,7 @@ const CyberAnimation = () => {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full"
-      style={{ background: 'radial-gradient(circle at center, rgba(220, 38, 38, 0.1) 0%, rgba(0, 0, 0, 0.9) 100%)' }}
+      style={{ background: 'radial-gradient(circle at center, rgba(220, 38, 38, 0.05) 0%, rgba(12, 12, 12, 0.9) 100%)' }}
     />
   );
 };
