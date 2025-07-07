@@ -22,93 +22,125 @@ const CyberAnimation = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Matrix rain effect
-    const matrix = "01";
-    const matrixArray = matrix.split("");
-    const fontSize = 12;
-    const columns = canvas.width / fontSize;
-    const drops: number[] = [];
+    // 3D Loader Configuration
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const baseRadius = Math.min(canvas.width, canvas.height) / 4;
+    
+    // Multiple rotating rings
+    const rings = [
+      { radius: baseRadius * 0.6, speed: 0.02, thickness: 3, alpha: 0.8 },
+      { radius: baseRadius * 0.8, speed: -0.015, thickness: 2, alpha: 0.6 },
+      { radius: baseRadius * 1.0, speed: 0.01, thickness: 4, alpha: 0.4 },
+    ];
 
-    for (let x = 0; x < columns; x++) {
-      drops[x] = Math.random() * canvas.height / fontSize;
-    }
-
-    // Floating nodes
-    interface Node {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-    }
-
-    const nodes: Node[] = [];
-    const nodeCount = 25;
-
-    // Create nodes
-    for (let i = 0; i < nodeCount; i++) {
-      nodes.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 2 + 1
+    // Orbiting particles
+    const particles = [];
+    for (let i = 0; i < 12; i++) {
+      particles.push({
+        angle: (i / 12) * Math.PI * 2,
+        radius: baseRadius * 0.5,
+        speed: 0.03,
+        size: Math.random() * 3 + 2,
+        alpha: Math.random() * 0.5 + 0.5
       });
     }
 
+    let rotation = 0;
     let animationId: number;
 
     const animate = () => {
-      // Semi-transparent background for trail effect
+      // Clear canvas with fade effect
       ctx.fillStyle = 'rgba(12, 12, 12, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Matrix rain
-      ctx.fillStyle = '#dc2626';
-      ctx.font = fontSize + 'px monospace';
+      rotation += 0.005;
 
-      for (let i = 0; i < drops.length; i++) {
-        const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      // Draw rotating rings
+      rings.forEach((ring, index) => {
+        const currentRotation = rotation * ring.speed;
+        
+        // Create gradient for 3D effect
+        const gradient = ctx.createRadialGradient(
+          centerX, centerY, ring.radius - 20,
+          centerX, centerY, ring.radius + 20
+        );
+        gradient.addColorStop(0, `rgba(220, 38, 38, 0)`);
+        gradient.addColorStop(0.5, `rgba(220, 38, 38, ${ring.alpha})`);
+        gradient.addColorStop(1, `rgba(220, 38, 38, 0)`);
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
+        // Draw ring segments to create loading effect
+        for (let i = 0; i < 8; i++) {
+          const startAngle = currentRotation + (i / 8) * Math.PI * 2;
+          const endAngle = startAngle + Math.PI / 6;
+          
+          ctx.beginPath();
+          ctx.arc(centerX, centerY, ring.radius, startAngle, endAngle);
+          ctx.lineWidth = ring.thickness;
+          ctx.strokeStyle = gradient;
+          ctx.lineCap = 'round';
+          ctx.stroke();
         }
-        drops[i]++;
-      }
-
-      // Update and draw nodes
-      nodes.forEach(node => {
-        // Update position
-        node.x += node.vx;
-        node.y += node.vy;
-
-        // Bounce off edges
-        if (node.x <= 0 || node.x >= canvas.width) node.vx *= -1;
-        if (node.y <= 0 || node.y >= canvas.height) node.vy *= -1;
-
-        // Draw node
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
-        ctx.fillStyle = '#dc2626';
-        ctx.fill();
-
-        // Draw connections
-        nodes.forEach(otherNode => {
-          const distance = Math.sqrt(
-            Math.pow(node.x - otherNode.x, 2) + Math.pow(node.y - otherNode.y, 2)
-          );
-
-          if (distance < 100) {
-            ctx.beginPath();
-            ctx.moveTo(node.x, node.y);
-            ctx.lineTo(otherNode.x, otherNode.y);
-            ctx.strokeStyle = `rgba(220, 38, 38, ${0.2 - distance / 500})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        });
       });
+
+      // Draw orbiting particles
+      particles.forEach((particle, index) => {
+        particle.angle += particle.speed;
+        
+        const x = centerX + Math.cos(particle.angle) * particle.radius;
+        const y = centerY + Math.sin(particle.angle) * particle.radius;
+        
+        // Create glowing effect
+        const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, particle.size * 3);
+        glowGradient.addColorStop(0, `rgba(220, 38, 38, ${particle.alpha})`);
+        glowGradient.addColorStop(0.5, `rgba(220, 38, 38, ${particle.alpha * 0.5})`);
+        glowGradient.addColorStop(1, `rgba(220, 38, 38, 0)`);
+        
+        // Draw glow
+        ctx.beginPath();
+        ctx.arc(x, y, particle.size * 3, 0, Math.PI * 2);
+        ctx.fillStyle = glowGradient;
+        ctx.fill();
+        
+        // Draw core particle
+        ctx.beginPath();
+        ctx.arc(x, y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(220, 38, 38, ${particle.alpha})`;
+        ctx.fill();
+      });
+
+      // Draw central core with pulsing effect
+      const pulseSize = 8 + Math.sin(rotation * 5) * 3;
+      const coreGradient = ctx.createRadialGradient(
+        centerX, centerY, 0,
+        centerX, centerY, pulseSize * 2
+      );
+      coreGradient.addColorStop(0, 'rgba(220, 38, 38, 1)');
+      coreGradient.addColorStop(0.5, 'rgba(220, 38, 38, 0.6)');
+      coreGradient.addColorStop(1, 'rgba(220, 38, 38, 0)');
+      
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, pulseSize, 0, Math.PI * 2);
+      ctx.fillStyle = coreGradient;
+      ctx.fill();
+
+      // Draw connection lines between particles
+      for (let i = 0; i < particles.length; i++) {
+        const particle1 = particles[i];
+        const particle2 = particles[(i + 1) % particles.length];
+        
+        const x1 = centerX + Math.cos(particle1.angle) * particle1.radius;
+        const y1 = centerY + Math.sin(particle1.angle) * particle1.radius;
+        const x2 = centerX + Math.cos(particle2.angle) * particle2.radius;
+        const y2 = centerY + Math.sin(particle2.angle) * particle2.radius;
+        
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = `rgba(220, 38, 38, 0.1)`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
 
       animationId = requestAnimationFrame(animate);
     };
