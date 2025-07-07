@@ -44,15 +44,15 @@ jobs:
           SSH_PORT: ${{ secrets.SERVER_PORT }}
         run: |
           echo "Deploying via sshpass..."
-          if ! sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "rm -rf domains/ecoganeshaarts.com/public_html/assets"; then
+          if ! sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "rm -rf domains/ankkiyy.com/public_html/assets"; then
             echo "Failed to remove assets folder"
             exit 1
           fi
-          if ! sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "cd domains/ecoganeshaarts.com/public_html && find . -maxdepth 1 ! -name 'upload' ! -name '.' -exec rm -rf {} +"; then
+          if ! sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "cd domains/ankkiyy.com/public_html && find . -maxdepth 1 ! -name 'upload' ! -name '.' -exec rm -rf {} +"; then
             echo "Failed to remove existing files"
             exit 1
           fi
-          if ! sshpass -p "$SSH_PASS" scp -P $SSH_PORT -o StrictHostKeyChecking=no -r dist/. $SSH_USER@$SSH_HOST:domains/ecoganeshaarts.com/public_html/; then
+          if ! sshpass -p "$SSH_PASS" scp -P $SSH_PORT -o StrictHostKeyChecking=no -r dist/. $SSH_USER@$SSH_HOST:domains/ankkiyy.com/public_html/; then
             echo "Failed to upload new files"
             exit 1
           fi
