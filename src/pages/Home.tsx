@@ -132,7 +132,7 @@ const Home = () => {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
                   <a
-                    href="public/resume.pdf"
+                    href="/resume.pdf"
                     download="Ankit-Prajapati-Resume.pdf"
                     className="group px-8 py-4 border border-primary/30 text-primary rounded-xl hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 flex items-center justify-center gap-3 font-medium backdrop-blur-sm transform hover:scale-105"
                   >
