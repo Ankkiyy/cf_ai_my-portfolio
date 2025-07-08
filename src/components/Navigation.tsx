@@ -25,7 +25,7 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
             <Shield className="h-8 w-8 text-primary group-hover:animate-cyber-pulse" />
-            <span className="text-xl font-semibold">CyberSec</span>
+            <span className="text-xl font-semibold">Ankit Prajapati</span>
           </Link>
 
           {/* Desktop Navigation */}

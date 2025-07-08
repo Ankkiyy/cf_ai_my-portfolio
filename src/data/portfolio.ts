@@ -30,6 +30,18 @@ export interface CaseStudy {
   view?: { [label: string]: string }; // [label, url]
 }
 
+export interface Testimonial {
+  id: string;
+  clientName: string;
+  clientTitle: string;
+  clientCompany: string;
+  industry: string;
+  quote: string;
+  rating: number;
+  projectType: string;
+  avatar?: string;
+}
+
 export const clients: Client[] = [
   {
     id: "1",
@@ -300,7 +312,7 @@ export const projects: Project[] = [
     ],
     category: "Game Modding",
     image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&h=600&fit=crop"
+      "/public/minecraft.png",
   }
 ];
 
@@ -337,8 +349,77 @@ export const caseStudies: CaseStudy[] = [
       "Prevented full host compromise",
       "Initiated organization-wide container hardening effort",
     ],
-    duration: "1 week",
+    duration: "4 Days",
     image:
-      "https://images.unsplash.com/photo-1581093588401-4f8d4ce7d98b?w=800&h=600&fit=crop",
+      "https://wallpapercave.com/dwp1x/wp8114669.jpg",
+  },
+];
+
+export const testimonials: Testimonial[] = [
+  {
+    id: "1",
+    clientName: "Angel Patil",
+    clientTitle: "Store Owner",
+    clientCompany: "The Magic Mirror Salon",
+    industry: "Fashion & Beauty",
+    quote: "The appointment booking platform revolutionized our customer experience. Bookings increased by 150% and customer satisfaction is at an all-time high. The personalized recommendations feature has been a game-changer for our business.",
+    rating: 5,
+    projectType: "Appointment Booking System",
+    avatar: "💄"
+  },
+  {
+    id: "2",
+    clientName: "Ankit Naik",
+    clientTitle: "Regional Manager",
+    clientCompany: "Bardoli Mother Dairy",
+    industry: "Retail",
+    quote: "The dynamic pricing desktop application created an innovative shopping experience that our customers absolutely loved. Sales during the 2-hour discount windows increased by 300%. It was exactly the retail innovation we needed.",
+    rating: 5,
+    projectType: "Retail Innovation App",
+    avatar: "🥛"
+  },
+  {
+    id: "3",
+    clientName: "Vishvanath Prasad",
+    clientTitle: "Business Owner",
+    clientCompany: "Prasad Barber Shops",
+    industry: "Personal Care Services",
+    quote: "The appointment and walk-in management system streamlined our operations perfectly. We can now handle 40% more customers daily while reducing wait times. The resource optimization features saved us thousands in operational costs.",
+    rating: 5,
+    projectType: "Resource Management System",
+    avatar: "💈"
+  },
+  {
+    id: "4",
+    clientName: "Amit Singh",
+    clientTitle: "Event Organizer",
+    clientCompany: "Budapest Pub Crawls",
+    industry: "Travel & Entertainment",
+    quote: "The online booking platform with integrated payments transformed our business from manual bookings to automated efficiency. International customers can now book seamlessly, and our revenue increased by 200% in the first quarter.",
+    rating: 5,
+    projectType: "Event Booking Platform",
+    avatar: "🍻"
+  },
+  {
+    id: "5",
+    clientName: "Mr. Vishal",
+    clientTitle: "Event Coordinator",
+    clientCompany: "SNPITRC Bardoli",
+    industry: "Education",
+    quote: "The event website and registration system made our college event management effortless. Real-time updates kept everyone informed, and the registration process was smooth for over 500 attendees. Professional execution from start to finish.",
+    rating: 5,
+    projectType: "Event Management Website",
+    avatar: "🎓"
+  },
+  {
+    id: "6",
+    clientName: "Shreya Sharma",
+    clientTitle: "Homeowner",
+    clientCompany: "Smart Home Enthusiast",
+    industry: "Home Automation",
+    quote: "The home automation system exceeded all expectations. I can control everything remotely while maintaining perfect security. The isolated camera system gives me peace of mind, and the manual override options are brilliant for daily use.",
+    rating: 5,
+    projectType: "Smart Home Integration",
+    avatar: "🏠"
   },
 ];
