@@ -2,24 +2,10 @@
 import { clients, testimonials } from '../data/portfolio';
 import { Building, Users, Star, ArrowRight, Award, Handshake, Globe, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import CyberAnimation from '../components/CyberAnimation';
-import CyberAnimation2 from '../components/CyberAnimation2';
-import CyberAnimation3 from '../components/CyberAnimation3';
-import CyberAnimation4 from '../components/CyberAnimation4';
-import CyberAnimation5 from '../components/CyberAnimation5';
 import CyberAnimation6 from '../components/CyberAnimation6';
 
 const Clients = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [animationTheme, setAnimationTheme] = useState<number>(1);
-
-  // Read theme from localStorage
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('t');
-    if (savedTheme) {
-      setAnimationTheme(parseInt(savedTheme));
-    }
-  }, []);
 
   // Auto-rotate testimonials
   useEffect(() => {
@@ -29,17 +15,7 @@ const Clients = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Component mapping for animations
-  const animations = {
-    1: CyberAnimation,
-    2: CyberAnimation2,
-    3: CyberAnimation3,
-    4: CyberAnimation4,
-    5: CyberAnimation5,
-    6: CyberAnimation6,
-  };
-
-  const SelectedAnimation = animations[animationTheme as keyof typeof animations] || CyberAnimation;
+  const SelectedAnimation = CyberAnimation6;
 
   const nextTestimonial = () => {
     setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);

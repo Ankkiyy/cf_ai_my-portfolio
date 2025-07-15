@@ -1,38 +1,13 @@
 
 import { projects } from '../data/portfolio';
 import { ExternalLink, Github, ArrowRight, Filter, Search } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import CyberAnimation from '../components/CyberAnimation';
-import CyberAnimation2 from '../components/CyberAnimation2';
-import CyberAnimation3 from '../components/CyberAnimation3';
-import CyberAnimation4 from '../components/CyberAnimation4';
-import CyberAnimation5 from '../components/CyberAnimation5';
+import { useState } from 'react';
 import CyberAnimation6 from '../components/CyberAnimation6';
 
 const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
-  const [animationTheme, setAnimationTheme] = useState<number>(1);
-
-  // Read theme from localStorage
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('t');
-    if (savedTheme) {
-      setAnimationTheme(parseInt(savedTheme));
-    }
-  }, []);
-
-  // Component mapping for animations
-  const animations = {
-    1: CyberAnimation,
-    2: CyberAnimation2,
-    3: CyberAnimation3,
-    4: CyberAnimation4,
-    5: CyberAnimation5,
-    6: CyberAnimation6,
-  };
-
-  const SelectedAnimation = animations[animationTheme as keyof typeof animations] || CyberAnimation;
+  const SelectedAnimation = CyberAnimation6;
 
   // Get unique categories
   const categories = ['All', ...new Set(projects.map(project => project.category))];
