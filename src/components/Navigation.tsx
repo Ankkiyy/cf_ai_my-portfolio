@@ -12,6 +12,8 @@ const Navigation = () => {
     { name: 'Projects', path: '/projects' },
     { name: 'Case Studies', path: '/case-studies' },
     { name: 'Clients', path: '/clients' },
+    { name: 'About', path: '/about' },
+    { name: 'Certificates', path: '/certificates' },
   ];
 
   const isActive = (path: string) => {

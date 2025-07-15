@@ -423,3 +423,43 @@ export const testimonials: Testimonial[] = [
     avatar: "🏠"
   },
 ];
+
+export interface About {
+  intro: string;
+  details: string;
+}
+
+export interface Certificate {
+  id: string;
+  title: string;
+  issuer: string;
+  date: string;
+  image: string;
+  url?: string;
+}
+
+export const about: About = {
+  intro: "Passionate full-stack developer and cybersecurity enthusiast.",
+  details:
+    "I craft secure and scalable applications with a focus on modern web technologies."
+};
+
+export const certificates: Certificate[] = [
+  {
+    id: "1",
+    title: "AWS Certified Solutions Architect – Associate",
+    issuer: "Amazon Web Services",
+    date: "2023",
+    image:
+      "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1d1?w=800&h=600&fit=crop",
+    url: "https://aws.amazon.com/certification/"
+  },
+  {
+    id: "2",
+    title: "Google Cybersecurity Certificate",
+    issuer: "Coursera",
+    date: "2022",
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop"
+  }
+];
