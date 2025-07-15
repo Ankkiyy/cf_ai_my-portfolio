@@ -6,6 +6,13 @@ const About = () => (
       <h1 className="text-4xl font-bold">About Me</h1>
       <p className="text-lg text-muted-foreground">{about.intro}</p>
       <p>{about.details}</p>
+      <p>
+        Contact me at{' '}
+        <a href="mailto:me@ankkiyy.com" className="text-primary hover:underline">
+          me@ankkiyy.com
+        </a>
+        .
+      </p>
     </div>
   </div>
 );

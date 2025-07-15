@@ -439,9 +439,9 @@ export interface Certificate {
 }
 
 export const about: About = {
-  intro: "Passionate full-stack developer and cybersecurity enthusiast.",
+  intro: "Ankit Prajapati – Cyber Security Expert and full-stack developer.",
   details:
-    "I craft secure and scalable applications with a focus on modern web technologies."
+    "With a background in penetration testing and secure application development, I help organizations defend their critical systems. My work spans web technologies, cloud security and threat hunting, delivering robust solutions for clients worldwide. I'm dedicated to improving digital resilience and regularly contribute to open-source security projects."
 };
 
 export const certificates: Certificate[] = [
