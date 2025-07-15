@@ -1,36 +1,10 @@
 
 import { caseStudies } from '../data/portfolio';
 import { Clock, CheckCircle, ArrowRight, Target, Lightbulb, TrendingUp } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import CyberAnimation from '../components/CyberAnimation';
-import CyberAnimation2 from '../components/CyberAnimation2';
-import CyberAnimation3 from '../components/CyberAnimation3';
-import CyberAnimation4 from '../components/CyberAnimation4';
-import CyberAnimation5 from '../components/CyberAnimation5';
 import CyberAnimation6 from '../components/CyberAnimation6';
 
 const CaseStudies = () => {
-  const [animationTheme, setAnimationTheme] = useState<number>(1);
-
-  // Read theme from localStorage
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('t');
-    if (savedTheme) {
-      setAnimationTheme(parseInt(savedTheme));
-    }
-  }, []);
-
-  // Component mapping for animations
-  const animations = {
-    1: CyberAnimation,
-    2: CyberAnimation2,
-    3: CyberAnimation3,
-    4: CyberAnimation4,
-    5: CyberAnimation5,
-    6: CyberAnimation6,
-  };
-
-  const SelectedAnimation = animations[animationTheme as keyof typeof animations] || CyberAnimation;
+  const SelectedAnimation = CyberAnimation6;
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">

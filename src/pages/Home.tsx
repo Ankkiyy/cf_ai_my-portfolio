@@ -1,54 +1,11 @@
 
 import { Shield, Lock, Eye, Zap, ArrowRight, Download, Github } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import CyberAnimation from '../components/CyberAnimation';
-import CyberAnimation2 from '../components/CyberAnimation2';
-import CyberAnimation3 from '../components/CyberAnimation3';
-import CyberAnimation4 from '../components/CyberAnimation4';
-import CyberAnimation5 from '../components/CyberAnimation5';
 import CyberAnimation6 from '../components/CyberAnimation6';
-import ContainedLoader from '../components/ContainedLoader';
-import ContainedLoader2 from '../components/ContainedLoader2';
-import ContainedLoader3 from '../components/ContainedLoader3';
-import ContainedLoader4 from '../components/ContainedLoader4';
-import ContainedLoader5 from '../components/ContainedLoader5';
 import ContainedLoader6 from '../components/ContainedLoader6';
 
 const Home = () => {
-  // Randomly pick animation theme on component mount
-  const [animationTheme, setAnimationTheme] = useState<number>(1);
-
-  useEffect(() => {
-    // Always generate a new random theme when Home page is visited
-    const randomTheme = Math.floor(Math.random() * 6) + 1;
-    console.log(`New Animation Theme selected: ${randomTheme}`);
-    setAnimationTheme(randomTheme);
-    
-    // Save to localStorage for other pages to use
-    localStorage.setItem('t', randomTheme.toString());
-  }, []);
-
-  // Component mapping for animations and loaders
-  const animations = {
-    1: CyberAnimation,
-    2: CyberAnimation2,
-    3: CyberAnimation3,
-    4: CyberAnimation4,      // Keep CyberAnimation4 but will update to red colors
-    5: CyberAnimation5,
-    6: CyberAnimation6,
-  };
-
-  const loaders = {
-    1: ContainedLoader,
-    2: ContainedLoader2,
-    3: ContainedLoader3,
-    4: ContainedLoader4,     // Keep ContainedLoader4 but will update to red colors
-    5: ContainedLoader5,
-    6: ContainedLoader6,
-  };
-
-  const SelectedAnimation = animations[animationTheme as keyof typeof animations];
-  const SelectedLoader = loaders[animationTheme as keyof typeof loaders];
+  const SelectedAnimation = CyberAnimation6;
+  const SelectedLoader = ContainedLoader6;
 
   const features = [
     {
