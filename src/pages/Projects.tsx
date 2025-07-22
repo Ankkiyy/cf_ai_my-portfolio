@@ -1,4 +1,3 @@
-
 import { projects } from '../data/portfolio';
 import { ExternalLink, Github, ArrowRight, Filter, Search } from 'lucide-react';
 import { useState } from 'react';
@@ -30,7 +29,7 @@ const Projects = () => {
       <div className="fixed inset-0 bg-gradient-to-br from-primary/5 via-transparent to-red-500/5 pointer-events-none z-[1]" />
       <div className="fixed inset-0 bg-gradient-to-tl from-blue-500/5 via-transparent to-transparent pointer-events-none z-[1]" />
       
-      <div className="pt-20 px-4 relative z-10">
+      <div className="pt-32 px-4 relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Enhanced Header */}
           <div className="text-center mb-16 space-y-6">
@@ -248,5 +247,5 @@ const Projects = () => {
     </div>
   );
 };
-
+ 
 export default Projects;

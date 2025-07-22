@@ -1,4 +1,3 @@
-
 import { caseStudies } from '../data/portfolio';
 import { Clock, CheckCircle, ArrowRight, Target, Lightbulb, TrendingUp } from 'lucide-react';
 import CyberAnimation6 from '../components/CyberAnimation6';
@@ -15,7 +14,7 @@ const CaseStudies = () => {
       <div className="fixed inset-0 bg-gradient-to-br from-primary/5 via-transparent to-blue-500/5 pointer-events-none z-[1]" />
       <div className="fixed inset-0 bg-gradient-to-tl from-purple-500/5 via-transparent to-transparent pointer-events-none z-[1]" />
       
-      <div className="pt-20 px-4 relative z-10">
+      <div className="pt-32 px-4 relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Enhanced Header */}
           <div className="text-center mb-20 space-y-6">

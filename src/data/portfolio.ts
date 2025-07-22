@@ -130,7 +130,7 @@ export const projects: Project[] = [
     technologies: ["PHP", "MySQL", "JavaScript", "HTML5", "CSS3"],
     category: "Appointment Booking",
     image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop",
+      "/images/themagicmirrorsalon.png",
     demo: "https://themagicmirrorsalon.com",
   },
   {
@@ -141,7 +141,7 @@ export const projects: Project[] = [
     technologies: ["Electron", "React", "Node.js"],
     category: "Retail Innovation",
     image:
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
+      "/images/bardolimotherdairy.png",
   },
   {
     id: "3",
@@ -160,7 +160,7 @@ export const projects: Project[] = [
     ],
     category: "Salon Management",
     image:
-      "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=800&h=600&fit=crop",
+      "/images/barbershopmanager.png",
   },
   {
     id: "4",
@@ -177,7 +177,7 @@ export const projects: Project[] = [
     ],
     category: "Event Booking",
     image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
+      "/images/budapestpubcrawls.png",
   },
   {
     id: "5",
@@ -196,7 +196,7 @@ export const projects: Project[] = [
     ],
     category: "Event Website",
     image:
-      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop",
+      "/images/technokrutisnpit.png",
   },
   {
     id: "6",
@@ -212,7 +212,7 @@ export const projects: Project[] = [
     ],
     category: "Home Automation",
     image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&h=600&fit=crop",
+      "/images/homeautomation.jpg",
   },
   {
     id: "7",
@@ -230,23 +230,24 @@ export const projects: Project[] = [
     ],
     category: "IoT & Remote Control",
     image:
-      "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=800&h=600&fit=crop",
+      "/images/wificar.webp",
   },
   {
     id: "8",
     title: "Personal Remote Control & Streaming Eco System",
     description:
       "A cross-platform eco system for personal use, enabling remote control of my laptop from anywhere, live streaming, and real-time chat. Built with Electron.js for desktop and React Native (Expo) for mobile. Utilizes WebRTC for secure streaming and live control, similar to AnyDesk. Currently offline for a major version upgrade focused on enhanced security and new features.",
-    technologies: [
-      "Electron.js",
-      "React Native",
-      "Expo",
-      "WebRTC",
-      "JavaScript",
-      "TypeScript",
-      "AWS Lambda",
-      "Docker",
-    ],
+    technologies:
+      [
+        "Electron.js",
+        "React Native",
+        "Expo",
+        "WebRTC",
+        "JavaScript",
+        "TypeScript",
+        "AWS Lambda",
+        "Docker",
+      ],
     category: "Remote Control & Streaming",
     image:
       "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=800&h=600&fit=crop",
@@ -269,7 +270,7 @@ export const projects: Project[] = [
     category: "Crime Reporting & Public Safety",
     image:
       "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=800&h=600&fit=crop",
-    demo: "https://github.com/yourusername/crimesnap",
+    demo: "https://github.com/TriadByte/Oddo-2024",
   },
   {
     id: "10",
@@ -285,7 +286,7 @@ export const projects: Project[] = [
     ],
     category: "UI Library",
     image:
-      "https://avatars.githubusercontent.com/u/166878038?s=200&v=4",
+      "/images/magicui.png",
   },
   {
     id: "11",
@@ -295,7 +296,7 @@ export const projects: Project[] = [
     technologies: ["React", "TypeScript", "Tailwind CSS", "GitHub Pages"],
     category: "Portfolio",
     image:
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=800&h=600&fit=crop",
+      "/images/portfolio.png",
     demo: "https://ankkiyy.com",
   },
   {
@@ -303,16 +304,17 @@ export const projects: Project[] = [
     title: "Minecraft Mods for Streamers: Particles & AI Integration",
     description:
       "Developed custom Minecraft mods for streamers, enabling advanced particle effects management and seamless AI integration within the game. Leveraged Java and deep game development expertise, utilizing CraftBench for efficient mod creation and deployment. Enhanced gameplay interactivity and visual experience for both streamers and their audiences.",
-    technologies: [
-      "Java 17",
-      "Minecraft Forge",
-      "CraftBench",
-      "Game Development",
-      "AI Integration"
-    ],
+    technologies:
+      [
+        "Java 17",
+        "Minecraft Forge",
+        "CraftBench",
+        "Game Development",
+        "AI Integration"
+      ],
     category: "Game Modding",
     image:
-      "/public/minecraft.png",
+      "/minecraft.png",
   }
 ];
 
@@ -433,6 +435,7 @@ export interface Certificate {
   id: string;
   title: string;
   issuer: string;
+  company: string[];
   date: string;
   image: string;
   url?: string;
@@ -447,19 +450,164 @@ export const about: About = {
 export const certificates: Certificate[] = [
   {
     id: "1",
-    title: "AWS Certified Solutions Architect – Associate",
-    issuer: "Amazon Web Services",
-    date: "2023",
-    image:
-      "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1d1?w=800&h=600&fit=crop",
-    url: "https://aws.amazon.com/certification/"
+    title: "PHP For Beginners",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Ankit_Prajapati-PHP-For-Beginners.jpg",
+    url: "https://ankkiyy.com/certificates/Ankit_Prajapati-PHP-For-Beginners.pdf"
   },
   {
     id: "2",
-    title: "Google Cybersecurity Certificate",
-    issuer: "Coursera",
-    date: "2022",
-    image:
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop"
+    title: "Python for Non-Programmers",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Ankit_Prajapati-Python-For-Non-Programmers.jpg",
+    url: "https://ankkiyy.com/certificates/Ankit_Prajapati-Python-For-Non-Programmers.pdf"
+  },
+  {
+    id: "3",
+    title: "Python Fundamentals",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Certificate---Python-Fundamentals-2.jpg",
+    url: "https://ankkiyy.com/certificates/Certificate---Python-Fundamentals-2.pdf"
+  },
+  {
+    id: "4",
+    title: "Microsoft Security Essentials Professional Certificate",
+    issuer: "Microsoft and LinkedIn",
+    company: ["Microsoft", "LinkedIn"],
+    date: "July 2025",
+    image: "/certificates/CertificateOfCompletion_Microsoft-Security-Essentials-Professional-Certificate-by-Microsoft-and-LinkedIn-1.jpg",
+    url: "https://ankkiyy.com/certificates/CertificateOfCompletion_Microsoft-Security-Essentials-Professional-Certificate-by-Microsoft-and-LinkedIn-1.pdf"
+  },
+  {
+    id: "5",
+    title: "Introduction to AWS Solutions",
+    issuer: "W3Schools",
+    company: ["W3Schools"],
+    date: "September 2023",
+    image: "/certificates/certificate_of_completion_introduction_to_aws_solutions-1.jpg",
+    url: "https://verify.w3schools.com/1O3JTLRQ3T"
+  },
+  {
+    id: "6",
+    title: "Google Ads - Measurement Certification",
+    issuer: "Google",
+    company: ["Google"],
+    date: "February 2024",
+    image: "/certificates/Google-Ads---Measurement-Certification-1.jpg",
+    url: "https://ankkiyy.com/certificates/Google-Ads---Measurement-Certification-1.pdf"
+  },
+  {
+    id: "7",
+    title: "Advanced Cyber Security - Threats and Governance",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Prajapati_Ankit_Kanaiyalal-Advanced-Cyber-Security-Threats-and-Governance.jpg",
+    url: "https://ankkiyy.com/certificates/Prajapati_Ankit_Kanaiyalal-Advanced-Cyber-Security-Threats-and-Governance.pdf"
+  },
+  {
+    id: "8",
+    title: "CSS Tutorial",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Prajapati_Ankit_Kanaiyalal-CSS-Tutorial.jpg",
+    url: "https://ankkiyy.com/certificates/Prajapati_Ankit_Kanaiyalal-CSS-Tutorial.pdf"
+  },
+  {
+    id: "9",
+    title: "Cyber Security Threats",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Prajapati_Ankit_Kanaiyalal-Cyber-Security-Threats.jpg",
+    url: "https://ankkiyy.com/certificates/Prajapati_Ankit_Kanaiyalal-Cyber-Security-Threats.pdf"
+  },
+  {
+    id: "10",
+    title: "Encryption Basics",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Prajapati_Ankit_Kanaiyalal-Encryption-Basics.jpg",
+    url: "https://ankkiyy.com/certificates/Prajapati_Ankit_Kanaiyalal-Encryption-Basics.pdf"
+  },
+  {
+    id: "11",
+    title: "Ethical Hacking",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Prajapati_Ankit_Kanaiyalal-Ethical-Hacking.jpg",
+    url: "https://ankkiyy.com/certificates/Prajapati_Ankit_Kanaiyalal-Ethical-Hacking.pdf"
+  },
+  {
+    id: "12",
+    title: "Front End Development - HTML",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Prajapati_Ankit_Kanaiyalal-Front-End-Dev-HTML.jpg",
+    url: "https://ankkiyy.com/certificates/Prajapati_Ankit_Kanaiyalal-Front-End-Dev-HTML.pdf"
+  },
+  {
+    id: "13",
+    title: "Introduction to Information Security",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Prajapati_Ankit_Kanaiyalal-Information-Security.jpg",
+    url: "https://ankkiyy.com/certificates/Prajapati_Ankit_Kanaiyalal-Information-Security.pdf"
+  },
+  {
+    id: "14",
+    title: "Introduction to Ethical Hacking",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Prajapati_Ankit_Kanaiyalal-Intro-Ethical-Hacking.jpg",
+    url: "https://ankkiyy.com/certificates/Prajapati_Ankit_Kanaiyalal-Intro-Ethical-Hacking.pdf"
+  },
+  {
+    id: "15",
+    title: "Introduction to Cyber Security",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Prajapati_Ankit_Kanaiyalal-Introduction-To-Cyber-Security.jpg",
+    url: "https://ankkiyy.com/certificates/Prajapati_Ankit_Kanaiyalal-Introduction-To-Cyber-Security.pdf"
+  },
+  {
+    id: "16",
+    title: "Introduction to Firewall",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Prajapati_Ankit_Kanaiyalal-Introduction-to-Firewall.jpg",
+    url: "https://ankkiyy.com/certificates/Prajapati_Ankit_Kanaiyalal-Introduction-to-Firewall.pdf"
+  },
+  {
+    id: "17",
+    title: "Python Fundamentals for Beginners",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Prajapati_Ankit_Kanaiyalal-Python-fundamentals.jpg",
+    url: "https://ankkiyy.com/certificates/Prajapati_Ankit_Kanaiyalal-Python-fundamentals.pdf"
+  },
+  {
+    id: "18",
+    title: "Types of Cyber Security",
+    issuer: "Great Learning Academy",
+    company: ["Great Learning"],
+    date: "July 2023",
+    image: "/certificates/Prajapati_Ankit_Kanaiyalal-Types-Of-Cyber-Security.jpg",
+    url: "https://ankkiyy.com/certificates/Prajapati_Ankit_Kanaiyalal-Types-Of-Cyber-Security.pdf"
   }
 ];

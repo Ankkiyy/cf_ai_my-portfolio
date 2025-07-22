@@ -1,4 +1,3 @@
-
 import { Shield, Lock, Eye, Zap, ArrowRight, Download, Github } from 'lucide-react';
 import CyberAnimation6 from '../components/CyberAnimation6';
 import ContainedLoader6 from '../components/ContainedLoader6';
@@ -43,7 +42,7 @@ const Home = () => {
       <div className="fixed inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 pointer-events-none z-[1]" />
       <div className="fixed inset-0 bg-gradient-to-tl from-red-500/5 via-transparent to-transparent pointer-events-none z-[1]" />
       
-      <div className="pt-16 relative z-10">
+      <div className="pt-24 relative z-10">
         {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center px-4 relative">
           {/* Floating elements */}
