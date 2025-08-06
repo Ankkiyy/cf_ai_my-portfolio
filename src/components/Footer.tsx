@@ -7,7 +7,30 @@ const Footer = () => (
       <nav className="flex flex-col md:flex-row gap-2 md:gap-6 text-sm items-center">
         <Link to="/about" className="hover:text-primary">About</Link>
         <Link to="/certificates" className="hover:text-primary">Certificates</Link>
-        <a href="https://github.com/ankkiyy" className="hover:text-primary" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a
+          href="https://github.com/ankkiyy"
+          className="hover:text-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://instagram.com/ankkiyy"
+          className="hover:text-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Instagram
+        </a>
+        <a
+          href="https://twitter.com/ankkiyy"
+          className="hover:text-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Twitter
+        </a>
         <a href="mailto:me@ankkiyy.com" className="hover:text-primary">me@ankkiyy.com</a>
       </nav>
     </div>

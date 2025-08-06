@@ -10,5 +10,14 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: GPTBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
 User-agent: *
 Allow: /
