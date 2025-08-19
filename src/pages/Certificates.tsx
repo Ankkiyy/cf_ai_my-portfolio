@@ -124,9 +124,9 @@ const Certificates = () => {
                 <p className="text-xs text-muted-foreground">
                   {cert.company.join(", ")}
                 </p>
-                {cert.url && (
+                {cert.image && (
                   <a
-                    href={cert.url}
+                    href={cert.image}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary text-sm hover:underline inline-block mt-2"
