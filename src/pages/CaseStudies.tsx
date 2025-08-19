@@ -138,9 +138,10 @@ const CaseStudies = () => {
                       </div>
 
                       {/* View Case Study Button */}
-                      {study.view && Object.entries(study.view).map(([label, url]) => (
-                        <div key={label} className="pt-4">
+                      <div className="flex flex-wrap gap-3 pt-4">
+                        {study.view && Object.entries(study.view).map(([label, url]) => (
                           <a
+                            key={label}
                             href={url}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -149,8 +150,20 @@ const CaseStudies = () => {
                             <span>{label}</span>
                             <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                           </a>
-                        </div>
-                      ))}
+                        ))}
+                        
+                        {study.link && (
+                          <a
+                            href={`${study.link}?utm_source=ankkiyy.com&utm_medium=website&utm_campaign=case_studies`}
+                            target="_blank"
+                            rel="noopener"
+                            className="group/btn inline-flex items-center gap-3 px-6 py-3 bg-blue-500/10 text-blue-400 rounded-xl hover:bg-blue-500/20 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 font-medium backdrop-blur-sm"
+                          >
+                            <span>LinkedIn Post</span>
+                            <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

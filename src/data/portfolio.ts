@@ -28,6 +28,7 @@ export interface CaseStudy {
   duration: string;
   image: string;
   view?: { [label: string]: string }; // [label, url]
+  link?: string; // LinkedIn post or external link
 }
 
 export interface Testimonial {
@@ -314,7 +315,7 @@ export const caseStudies: CaseStudy[] = [
     challenge:
       "Unreported vulnerabilities affecting subscription timestamp and desktop app security, risking user trust and data integrity.",
     solution:
-      "Identified epoch timestamp bug in mobile subscription system and script injection vulnerability in the desktop app. Responsibly disclosed findings to Spotify’s security team.",
+      "Identified epoch timestamp bug in mobile subscription system and script injection vulnerability in the desktop app. Responsibly disclosed findings to Spotify's security team.",
     results: [
       "Patched epoch vulnerability preventing future billing anomalies",
       "Secured desktop app against XSS-style injection",
@@ -324,6 +325,7 @@ export const caseStudies: CaseStudy[] = [
     duration: "2 hours",
     image:
       "https://wallpapers.com/images/hd/spotify-piano-and-headphones-psvd4nwl5u4foka8.jpg",
+    link: "https://linkedin.com/posts/your-linkedin-post-url"
   },
   {
     id: "2",
@@ -341,6 +343,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     duration: "4 Days",
     image: "https://wallpapercave.com/dwp1x/wp8114669.jpg",
+    link: "https://linkedin.com/posts/your-linkedin-post-url"
   },
 ];
 
