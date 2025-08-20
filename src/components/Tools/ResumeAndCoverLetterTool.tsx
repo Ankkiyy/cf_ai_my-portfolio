@@ -276,6 +276,7 @@ Instructions:
 2. Optimize experience descriptions to include relevant keywords from the job description
 3. Organize skills by relevance to the job requirements
 4. Ensure ATS-friendly formatting
+5. Use STAR (Situation, Task, Action, Result) method for experience descriptions and rewrite them to more suit the job description. Ex: X was slow and Y needed optimization, so I implemented Z, resulting in improved XYZ.
 
 Format Instructions: {format_instructions}
 `,
@@ -504,9 +505,9 @@ Format Instructions: {format_instructions}
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <User className="h-8 w-8 text-primary" />
             </div>
-            <h2 className="text-2xl font-bold mb-2">Personal Information</h2>
+            <h2 className="text-2xl font-bold mb-2">Setup Your Profile</h2>
             <p className="text-muted-foreground">
-              Fill in your personal details and API key to get started
+              Fill in your details once, then generate tailored resumes for different jobs
             </p>
           </div>
 
@@ -637,16 +638,6 @@ Format Instructions: {format_instructions}
                 className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary/50"
               />
             </div>
-          </div>
-
-          {/* Save Personal Info Button */}
-          <div className="mb-8">
-            <button
-              onClick={handleSavePersonalInfo}
-              className="w-full px-6 py-3 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-lg hover:bg-blue-500/20 hover:border-blue-500/30 transition-all duration-300 font-medium"
-            >
-              Save Personal Information
-            </button>
           </div>
 
           {/* Work Experience Section */}
@@ -906,19 +897,20 @@ Format Instructions: {format_instructions}
                 </button>
               </div>
 
+              {/* Combined Save & Continue Button */}
               <button
                 type="submit"
                 disabled={!apiToken?.trim()}
-                className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                onClick={() => handleSavePersonalInfo()}
+                className="w-full px-6 py-4 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-lg"
               >
-                Continue to Resume Generator
+                Save Profile & Continue to Resume Generator
               </button>
             </form>
 
             <div className="text-xs text-muted-foreground text-center mt-4">
               <p>
-                Your information is stored locally and encrypted in browser
-                storage.
+                Your information is stored locally and encrypted in browser storage.
               </p>
               <p>
                 Get your API key from{" "}
