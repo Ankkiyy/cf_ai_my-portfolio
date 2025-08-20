@@ -277,6 +277,7 @@ Instructions:
 3. Organize skills by relevance to the job requirements
 4. Ensure ATS-friendly formatting
 5. Use STAR (Situation, Task, Action, Result) method for experience descriptions and rewrite them to more suit the job description. Ex: X was slow and Y needed optimization, so I implemented Z, resulting in improved XYZ.
+6. Use Metrics to quantify achievements and enhance impact in descriptions with keywords of metrics (e.g., "Increased sales by 20%").
 
 Format Instructions: {format_instructions}
 `,
