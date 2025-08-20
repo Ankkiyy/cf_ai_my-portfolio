@@ -23,7 +23,9 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@reducers/*": ["./src/data/store/reducers/*"],
+      "@store/*": ["./src/data/store/*"]
     }
   },
   "include": ["src"]

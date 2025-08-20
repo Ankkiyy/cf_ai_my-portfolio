@@ -14,6 +14,8 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "@reducers": path.resolve(__dirname, "./src/data/store/reducers"),
+      "@store": path.resolve(__dirname, "./src/data/store"),
     },
   },
 }));
