@@ -16,8 +16,6 @@ import {
   Trash2,
   GraduationCap,
   Building,
-  Calendar,
-  MapPin,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
