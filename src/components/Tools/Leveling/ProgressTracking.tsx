@@ -14,6 +14,7 @@ const ProgressTracking = () => {
   const getDailyData = () => {
     const data = [];
     const today = new Date();
+    const settings = useAppSelector((state) => state.leveling.settings);
     
     for (let i = 6; i >= 0; i--) {
       const date = new Date(today);
@@ -26,7 +27,7 @@ const ProgressTracking = () => {
       });
       
       const totalXpGained = logsForDay.reduce((sum, log) => {
-        return sum + log.processedSkills.length * 10; // Assuming 10 XP per skill
+        return sum + log.processedSkills.length * settings.dailyXpGain;
       }, 0);
       
       data.push({
@@ -43,6 +44,7 @@ const ProgressTracking = () => {
   const getMonthlyData = () => {
     const data = [];
     const today = new Date();
+    const settings = useAppSelector((state) => state.leveling.settings);
     
     for (let i = 5; i >= 0; i--) {
       const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
@@ -55,7 +57,7 @@ const ProgressTracking = () => {
       });
       
       const totalXpGained = logsForMonth.reduce((sum, log) => {
-        return sum + log.processedSkills.length * 10;
+        return sum + log.processedSkills.length * settings.dailyXpGain;
       }, 0);
       
       data.push({

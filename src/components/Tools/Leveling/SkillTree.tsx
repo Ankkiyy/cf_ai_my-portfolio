@@ -16,7 +16,6 @@ const SkillTree = () => {
   const profile = useAppSelector((state) => state.leveling.profile);
 
   const [showAddDialog, setShowAddDialog] = useState(false);
-  const [editingSkillId, setEditingSkillId] = useState<string | null>(null);
   const [newSkillName, setNewSkillName] = useState("");
   const [newSkillCategory, setNewSkillCategory] = useState("");
   const [selectedParentId, setSelectedParentId] = useState<string | null>(null);

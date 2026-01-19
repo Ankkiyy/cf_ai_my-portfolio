@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { calculateLevel } from './levelingUtils'
 
 export interface Skill {
     id: string
@@ -98,22 +99,11 @@ const levelingSlice = createSlice({
         addXpToSkill: (state, action: PayloadAction<{ skillId: string; xp: number }>) => {
             const skill = state.skills[action.payload.skillId]
             if (skill) {
-                const oldXp = skill.xp
                 skill.xp += action.payload.xp
                 skill.lastUpdated = new Date().toISOString()
                 
-                // Calculate level (exponential: level 1 = 20, level 2 = 30, level 3 = 40, etc.)
-                let xpRequired = 20
-                let level = 1
-                let totalXpForLevel = 0
-                
-                while (totalXpForLevel + xpRequired <= skill.xp) {
-                    totalXpForLevel += xpRequired
-                    level += 1
-                    xpRequired += 10
-                }
-                
-                skill.level = level
+                // Calculate level using utility function
+                skill.level = calculateLevel(skill.xp)
                 state.profile.totalXp += action.payload.xp
             }
         },
@@ -124,18 +114,8 @@ const levelingSlice = createSlice({
                 skill.xp = Math.max(0, skill.xp - penalty)
                 skill.lastUpdated = new Date().toISOString()
                 
-                // Recalculate level
-                let xpRequired = 20
-                let level = 1
-                let totalXpForLevel = 0
-                
-                while (totalXpForLevel + xpRequired <= skill.xp) {
-                    totalXpForLevel += xpRequired
-                    level += 1
-                    xpRequired += 10
-                }
-                
-                skill.level = level
+                // Recalculate level using utility function
+                skill.level = calculateLevel(skill.xp)
                 state.profile.totalXp = Math.max(0, state.profile.totalXp - penalty)
             }
         },

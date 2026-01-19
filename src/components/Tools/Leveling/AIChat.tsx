@@ -33,6 +33,17 @@ const AIChat = () => {
 
   const processWithAI = async (text: string): Promise<string[]> => {
     try {
+      // Sanitize input to prevent prompt injection
+      const sanitizedText = text
+        .replace(/[<>]/g, '') // Remove potential HTML/XML tags
+        .replace(/```/g, '') // Remove code block markers
+        .trim()
+        .slice(0, 2000); // Limit length
+
+      if (!sanitizedText) {
+        return [];
+      }
+
       const response = await fetch(`${settings.aiModelUrl}/api/generate`, {
         method: 'POST',
         headers: {
@@ -40,13 +51,13 @@ const AIChat = () => {
         },
         body: JSON.stringify({
           model: settings.aiModelName,
-          prompt: `Analyze the following daily log and identify which skills were worked on. Only return skill names that were actually mentioned or implied, separated by commas. Skills available: ${Object.values(skills).map(s => s.name).join(', ')}.\n\nDaily log: ${text}\n\nSkills worked on (comma-separated):`,
+          prompt: `Analyze the following daily log and identify which skills were worked on. Only return skill names that were actually mentioned or implied, separated by commas. Skills available: ${Object.values(skills).map(s => s.name).join(', ')}.\n\nDaily log: ${sanitizedText}\n\nSkills worked on (comma-separated):`,
           stream: false,
         }),
       });
 
       if (!response.ok) {
-        throw new Error('AI model request failed');
+        throw new Error(`AI model request failed with status ${response.status}: ${response.statusText}`);
       }
 
       const data = await response.json();
