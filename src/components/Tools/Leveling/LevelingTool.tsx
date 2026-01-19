@@ -11,6 +11,8 @@ import {
   Save,
   Trash2,
   Users,
+  Gamepad2,
+  StickyNote,
 } from "lucide-react";
 import { io, type Socket } from "socket.io-client";
 
@@ -27,6 +29,8 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import GameProfile from "./GameProfile";
 
 const STORAGE_KEY = "leveling.entries";
 const SIGNAL_KIND = "leveling-webrtc";
@@ -1317,7 +1321,7 @@ const LevelingTool = () => {
           <div>
             <h1 className="text-3xl font-semibold md:text-4xl">Leveling</h1>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground md:text-base">
-              Take notes locally and sync entire browser storage peer-to-peer. Send invites through the signaling hub to establish a WebRTC link—no servers, no uploads, just encrypted browsers talking directly.
+              Game profile with skill leveling system and local note-taking with peer-to-peer sync
             </p>
           </div>
         </div>
@@ -1401,6 +1405,23 @@ const LevelingTool = () => {
         </div>
       </div>
 
+      <Tabs defaultValue="game" className="w-full">
+        <TabsList className="grid w-full grid-cols-2 mb-6">
+          <TabsTrigger value="game" className="flex items-center gap-2">
+            <Gamepad2 className="h-4 w-4" />
+            Game Profile
+          </TabsTrigger>
+          <TabsTrigger value="notes" className="flex items-center gap-2">
+            <StickyNote className="h-4 w-4" />
+            Notes & Sync
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="game">
+          <GameProfile />
+        </TabsContent>
+
+        <TabsContent value="notes">
       <div className="grid gap-6 md:grid-cols-[280px_1fr]">
         <div className="rounded-2xl border border-border/70 bg-card/70 p-4 shadow-lg shadow-primary/5">
           <div className="flex items-center justify-between text-sm font-semibold uppercase tracking-wide text-muted-foreground">
@@ -1585,6 +1606,7 @@ const LevelingTool = () => {
             </span>
           )}
         </div>
+      </div>
       </div>
 
       <Dialog open={peerListModalOpen} onOpenChange={setPeerListModalOpen}>
@@ -1892,6 +1914,8 @@ const LevelingTool = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
