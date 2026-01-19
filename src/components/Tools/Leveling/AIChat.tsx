@@ -12,6 +12,7 @@ const AIChat = () => {
   const settings = useAppSelector((state) => state.leveling.settings);
   const skills = useAppSelector((state) => state.leveling.skills);
   const lastCheckDate = useAppSelector((state) => state.leveling.lastCheckDate);
+  const dailyLogs = useAppSelector((state) => state.leveling.dailyLogs);
 
   const [dailyLog, setDailyLog] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -217,6 +218,52 @@ const AIChat = () => {
             <li>Missing a full day degrades all skills</li>
           </ul>
         </div>
+
+        {/* Daily Log History */}
+        {dailyLogs.length > 0 && (
+          <div className="mt-6 space-y-3">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              Daily Log History
+            </h3>
+            <div className="max-h-[400px] space-y-2 overflow-y-auto">
+              {dailyLogs.map((log) => (
+                <div
+                  key={log.id}
+                  className="rounded-lg border border-border/60 bg-background/60 p-3"
+                >
+                  <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
+                    <span>
+                      {new Date(log.date).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })}
+                    </span>
+                    <span>{log.processedSkills.length} skill{log.processedSkills.length !== 1 ? 's' : ''} updated</span>
+                  </div>
+                  <p className="text-sm">{log.content}</p>
+                  {log.processedSkills.length > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {log.processedSkills.map((skillId) => {
+                        const skill = skills[skillId];
+                        return skill ? (
+                          <span
+                            key={skillId}
+                            className="rounded-md bg-primary/10 px-2 py-0.5 text-xs text-primary"
+                          >
+                            {skill.name}
+                          </span>
+                        ) : null;
+                      })}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

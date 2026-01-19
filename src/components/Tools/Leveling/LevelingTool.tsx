@@ -11,8 +11,6 @@ import {
   Save,
   Trash2,
   Users,
-  Gamepad2,
-  StickyNote,
 } from "lucide-react";
 import { io, type Socket } from "socket.io-client";
 
@@ -29,8 +27,9 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import GameProfile from "./GameProfile";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { importLevelingState } from "@reducers/levelingSlice";
 
 const STORAGE_KEY = "leveling.entries";
 const SIGNAL_KIND = "leveling-webrtc";
@@ -181,6 +180,9 @@ const formatBytes = (size: number) => {
 };
 
 const LevelingTool = () => {
+  const dispatch = useAppDispatch();
+  const levelingState = useAppSelector((state) => state.leveling);
+  
   const [entries, setEntries] = useState<LevelingEntry[]>([]);
   const [activeEntryId, setActiveEntryId] = useState<string | null>(null);
   const [draftTitle, setDraftTitle] = useState("");
@@ -244,13 +246,17 @@ const LevelingTool = () => {
 
     const snapshot: Record<string, string> = {};
 
+    // Include the leveling state from Redux persist
     for (let index = 0; index < window.localStorage.length; index += 1) {
       const key = window.localStorage.key(index);
       if (!key) {
         continue;
       }
-      const value = window.localStorage.getItem(key);
-      snapshot[key] = value ?? "";
+      // Prioritize syncing the leveling data
+      if (key === 'persist:root' || key.startsWith('leveling')) {
+        const value = window.localStorage.getItem(key);
+        snapshot[key] = value ?? "";
+      }
     }
 
     return snapshot;
@@ -1321,7 +1327,7 @@ const LevelingTool = () => {
           <div>
             <h1 className="text-3xl font-semibold md:text-4xl">Leveling</h1>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground md:text-base">
-              Game profile with skill leveling system and local note-taking with peer-to-peer sync
+              Game profile with skill leveling system and peer-to-peer sync
             </p>
           </div>
         </div>
@@ -1405,145 +1411,13 @@ const LevelingTool = () => {
         </div>
       </div>
 
-      <Tabs defaultValue="game" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-6">
-          <TabsTrigger value="game" className="flex items-center gap-2">
-            <Gamepad2 className="h-4 w-4" />
-            Game Profile
-          </TabsTrigger>
-          <TabsTrigger value="notes" className="flex items-center gap-2">
-            <StickyNote className="h-4 w-4" />
-            Notes & Sync
-          </TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="game">
-          <GameProfile />
-        </TabsContent>
-
-        <TabsContent value="notes">
-      <div className="grid gap-6 md:grid-cols-[280px_1fr]">
-        <div className="rounded-2xl border border-border/70 bg-card/70 p-4 shadow-lg shadow-primary/5">
-          <div className="flex items-center justify-between text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-            <span>Entries</span>
-            <Badge variant="outline">{entries.length}</Badge>
-          </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="mt-4 w-full justify-start"
-            onClick={handleAddEntry}
-          >
-            <Plus className="h-4 w-4" />
-            New entry
-          </Button>
-          <Separator className="my-4" />
-          <div className="max-h-[380px] space-y-2 overflow-y-auto pr-1">
-            {entries.map((entry) => (
-              <button
-                key={entry.id}
-                type="button"
-                onClick={() => handleSelectEntry(entry.id)}
-                className={`w-full rounded-xl border px-3 py-2 text-left transition ${
-                  entry.id === activeEntryId
-                    ? "border-primary/40 bg-primary/10 text-primary"
-                    : "border-transparent bg-background/60 hover:border-border/80 hover:bg-background"
-                }`}
-              >
-                <div className="text-sm font-semibold">
-                  {entry.title.trim() || "Untitled entry"}
-                </div>
-                <div
-                  className={`text-xs ${entry.id === activeEntryId ? "text-primary/80" : "text-muted-foreground"}`}
-                >
-                  {formatRelativeTime(entry.updatedAt)}
-                </div>
-              </button>
-            ))}
-            {entries.length === 0 && (
-              <div className="rounded-xl border border-dashed border-border/70 bg-background/40 px-3 py-6 text-center text-xs text-muted-foreground">
-                No entries yet. Create your first note to get started.
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-border/70 bg-card/80 p-6 shadow-xl shadow-primary/5">
-          {activeEntry ? (
-            <div className="space-y-6">
-              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div className="w-full space-y-2">
-                  <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Title
-                  </label>
-                  <Input
-                    value={draftTitle}
-                    onChange={(event) => {
-                      setDraftTitle(event.target.value);
-                      scheduleAutoSave();
-                    }}
-                    placeholder="Entry title"
-                  />
-                </div>
-                <div className="flex shrink-0 gap-2">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={loadEntriesFromStorage}
-                    title="Reload entries from storage"
-                  >
-                    <RefreshCcw className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="destructive"
-                    size="icon"
-                    onClick={handleDeleteEntry}
-                    title="Delete entry"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                  Content
-                </label>
-                <Textarea
-                  value={draftContent}
-                  onChange={(event) => {
-                    setDraftContent(event.target.value);
-                    scheduleAutoSave();
-                  }}
-                  rows={18}
-                  placeholder="Write your notes here."
-                  className="min-h-[320px]"
-                />
-              </div>
-              <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-                <div className="text-xs text-muted-foreground">
-                  {autoSavePending
-                    ? "Auto-saving in a moment..."
-                    : `Last updated ${formatRelativeTime(activeEntry.updatedAt)}`}
-                </div>
-                <Button onClick={handleSaveEntry}>
-                  <Save className="h-4 w-4" />
-                  Save to localStorage
-                </Button>
-              </div>
-            </div>
-          ) : (
-            <div className="flex h-full min-h-[320px] items-center justify-center rounded-xl border border-dashed border-border/70 bg-background/40 p-8 text-center text-sm text-muted-foreground">
-              Select an entry or create a new one to begin editing.
-            </div>
-          )}
-        </div>
-      </div>
+      <GameProfile />
 
       <div className="mt-10 rounded-2xl border border-border/70 bg-card/80 p-6 text-sm text-muted-foreground">
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-2 text-foreground">
             <Link2 className="h-4 w-4 text-primary" />
-            <span className="font-medium text-foreground">Realtime sync</span>
+            <span className="font-medium text-foreground">Peer-to-peer sync</span>
           </div>
           <Separator orientation="vertical" className="hidden h-6 md:block" />
           <Badge variant={isConnected ? "default" : "outline"}>{connectionStatus}</Badge>
@@ -1554,7 +1428,7 @@ const LevelingTool = () => {
           )}
           {isConnected && (
             <span className="text-xs text-muted-foreground">
-              Snapshot updates flow both directions.
+              Your skills and progress sync automatically
             </span>
           )}
         </div>
@@ -1589,26 +1463,6 @@ const LevelingTool = () => {
           )}
         </div>
       </div>
-
-      <div className="mt-6 rounded-2xl border border-border/70 bg-card/80 p-6 text-sm text-muted-foreground">
-        <div className="flex flex-wrap items-center gap-4">
-          <div className="flex items-center gap-2 text-foreground">
-            <LockKeyhole className="h-4 w-4 text-primary" />
-            <span className="font-medium text-foreground">Storage snapshot</span>
-          </div>
-          <Separator orientation="vertical" className="hidden h-6 md:block" />
-          <span>{storageMeta.keys} keys</span>
-          <span>≈ {formatBytes(storageMeta.size)}</span>
-          {storageKeysPreview.length > 0 && (
-            <span className="truncate text-xs text-muted-foreground">
-              Keys: {storageKeysPreview.join(", ")}
-              {storageMeta.keys > storageKeysPreview.length ? "…" : ""}
-            </span>
-          )}
-        </div>
-      </div>
-        </TabsContent>
-      </Tabs>
 
       <Dialog open={peerListModalOpen} onOpenChange={setPeerListModalOpen}>
         <DialogContent className="sm:max-w-md">
