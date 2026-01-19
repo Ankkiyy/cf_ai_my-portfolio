@@ -1607,7 +1607,8 @@ const LevelingTool = () => {
           )}
         </div>
       </div>
-      </div>
+        </TabsContent>
+      </Tabs>
 
       <Dialog open={peerListModalOpen} onOpenChange={setPeerListModalOpen}>
         <DialogContent className="sm:max-w-md">
@@ -1914,8 +1915,6 @@ const LevelingTool = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-        </TabsContent>
-      </Tabs>
     </div>
   );
 };
