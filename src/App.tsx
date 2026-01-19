@@ -15,8 +15,9 @@ import Clients from "./pages/Clients";
 import About from "./pages/About";
 import Certificates from "./pages/Certificates";
 import Tools from "./pages/Tools";
-import { TOOL1_ROUTE } from "./components/Tools/Constants";
+import { TOOL1_ROUTE, LEVELING_ROUTE } from "./components/Tools/Constants";
 import ResumeAndCoverLetterTool from "./components/Tools/ResumeAndCoverLetterTool";
+import LevelingTool from "./components/Tools/Leveling/LevelingTool";
 import NotFound from "./pages/NotFound";
 import { store, persistor } from "./data/store/index";
 
@@ -56,6 +57,7 @@ const App = () => (
                 <Route path="/certificates" element={<Certificates />} />
                 <Route path="/tools" element={<Tools />}>
                   <Route path={TOOL1_ROUTE.path} element={<ResumeAndCoverLetterTool />} />
+                  <Route path={LEVELING_ROUTE.path} element={<LevelingTool />} />
                 </Route>
                 <Route path="*" element={<NotFound />} />
               </Routes>

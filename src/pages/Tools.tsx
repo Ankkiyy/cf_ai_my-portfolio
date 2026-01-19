@@ -1,21 +1,19 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Wrench, ExternalLink } from 'lucide-react';
 import CyberAnimation6 from '../components/CyberAnimation6';
-import { TOOL1_ROUTE } from '../components/Tools/Constants';
+import { TOOL_ROUTES } from '../components/Tools/Constants';
 
 const Tools = () => {
   const location = useLocation();
   const isToolsHome = location.pathname === '/tools';
 
-  const tools = [
-    {
-      id: TOOL1_ROUTE.path,
-      name: TOOL1_ROUTE.name,
-      description: TOOL1_ROUTE.description,
-      path: `/tools/${TOOL1_ROUTE.path}`,
-      icon: TOOL1_ROUTE.icon
-    }
-  ];
+  const tools = TOOL_ROUTES.map((tool) => ({
+    id: tool.path,
+    name: tool.name,
+    description: tool.description,
+    path: `/tools/${tool.path}`,
+    icon: tool.icon
+  }));
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
