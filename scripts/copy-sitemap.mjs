@@ -2,7 +2,7 @@ import { copyFileSync, existsSync, unlinkSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 const distDir = resolve(process.cwd(), "dist");
-const source = join(distDir, "Sitemap.xml");
+const source = join(distDir, "sitemap.xml");
 const destination = join(distDir, "sitemap.xml");
 
 if (!existsSync(distDir)) {
@@ -11,7 +11,7 @@ if (!existsSync(distDir)) {
 }
 
 if (!existsSync(source)) {
-  console.warn("Sitemap.xml not found in dist. Skipping sitemap copy.");
+  console.warn("sitemap.xml not found in dist. Skipping sitemap copy.");
   process.exit(0);
 }
 
@@ -31,10 +31,10 @@ const isCaseSensitiveFilesystem = () => {
 try {
   copyFileSync(source, destination);
   if (isCaseSensitiveFilesystem()) {
-    console.info("Copied Sitemap.xml to sitemap.xml for case-sensitive hosts.");
+    console.info("Copied sitemap.xml to sitemap.xml for case-sensitive hosts.");
   } else {
     console.info(
-      "Case-insensitive filesystem detected. sitemap.xml will reference the same file as Sitemap.xml."
+      "Case-insensitive filesystem detected. sitemap.xml will reference the same file as sitemap.xml."
     );
   }
 } catch (error) {
