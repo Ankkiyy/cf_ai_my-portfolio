@@ -11,6 +11,9 @@ A modern, feature-rich cybersecurity professional portfolio built with React, Ty
 - [Features](#features)
   - [Portfolio Sections](#portfolio-sections)
   - [Interactive Tools](#interactive-tools)
+- [Tool Usage Guide](#tool-usage-guide)
+  - [AI Resume & Cover Letter Generator — Usage](#ai-resume--cover-letter-generator--usage)
+  - [Leveling Tool — Usage](#leveling-tool--usage)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
@@ -20,6 +23,7 @@ A modern, feature-rich cybersecurity professional portfolio built with React, Ty
 - [Available Scripts](#available-scripts)
 - [Environment Variables](#environment-variables)
 - [Deployment](#deployment)
+- [AI Prompts Reference](#ai-prompts-reference)
 
 ---
 
@@ -49,7 +53,9 @@ Additional capabilities across all pages:
 
 Both tools are accessible from the **Tools** hub (`/tools`).
 
-#### 1. AI Resume & Cover Letter Generator (`/tools/resume`)
+#### 1. AI Resume & Cover Letter Generator
+
+🔗 **Live:** [ankkiyy.com/tools/ai-resume-and-cover-letter-generator](https://ankkiyy.com/tools/ai-resume-and-cover-letter-generator)
 
 An LLM-powered document builder that creates tailored resumes and cover letters.
 
@@ -59,18 +65,114 @@ An LLM-powered document builder that creates tailored resumes and cover letters.
 - Bring your own **Google Gemini API key** — stored locally, never sent to any server other than Google's API
 - Built with **React Hook Form** and **Zod** schema validation
 
-#### 2. Leveling Tool (`/tools/leveling`)
+> ⚠️ **API Key required:** To prevent abuse, the tool does **not** include a shared API key. Each user must obtain their own free key from [Google AI Studio](https://aistudio.google.com/app/apikey) and enter it in the tool's setup screen. The key is saved only in your browser's local storage and is never sent to this project's servers.
+
+#### 2. Leveling Tool
+
+🔗 **Live:** [ankkiyy.com/tools/leveling](https://ankkiyy.com/tools/leveling)
 
 A gamified personal-development notebook with real-time sync capabilities.
 
 - **Game Profile** — create and manage your personal character profile
 - **Skill Tree** — track progress across custom skill branches with visual progress indicators (powered by Recharts)
 - **Progress Tracking** — view achievement history and milestone completion
-- **AI Chat** — built-in AI assistant for guidance and motivation
-- **Settings** — customise preferences stored persistently
-- **Encrypted QR Sync** — export your entire notebook state as an encrypted QR code; scan it from another device to import instantly (no account or server storage needed)
-- **WebRTC P2P Sync** — real-time, peer-to-peer data transfer between devices using Socket.io signaling + native WebRTC
+- **Daily Log (AI)** — write a free-text description of your day; AI analyses the text, identifies which skills you worked on, and updates XP automatically
+- **Settings** — customise AI model endpoint, XP gain/penalty values, and sync preferences; all stored persistently
+- **Encrypted QR Sync** — export your entire notebook state as an AES-GCM encrypted QR code; scan it from another device to import instantly (no account or server storage needed)
+- **WebRTC P2P Sync** — real-time, peer-to-peer data transfer between devices using Socket.io signaling + native WebRTC; no user data passes through the signaling server
 - All state is managed with **Redux Toolkit** and persisted with AES-encrypted local storage
+
+---
+
+## Tool Usage Guide
+
+### AI Resume & Cover Letter Generator — Usage
+
+🔗 **[https://ankkiyy.com/tools/ai-resume-and-cover-letter-generator](https://ankkiyy.com/tools/ai-resume-and-cover-letter-generator)**
+
+#### Prerequisites
+
+- A free **Google Gemini API key** from [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+
+#### Step-by-Step
+
+1. **Enter your API key** on the setup screen. The key is stored only in your browser (AES-encrypted local storage) and is sent exclusively to Google's Generative AI API — never to this project's servers.
+2. **Fill in Personal Information** — name, email, phone, location, LinkedIn, GitHub, and portfolio URL. Click **Save** to persist to local storage.
+3. **Add Work Experience** — click **Add Experience**, then fill in job title, company, location, dates, and a description of your responsibilities and achievements.
+4. **Add Education** — click **Add Education** and fill in degree, institution, dates, GPA (optional), and any relevant coursework.
+5. **Enter Job Details** — paste the full job description and list the key skills you want to highlight.
+6. **Click Generate** — the tool calls the Gemini API (`gemini-2.5-flash-lite`) and produces an ATS-optimized resume structured as JSON, rendered as Markdown.
+7. **Review & Export** — copy the output to clipboard, toggle between rendered and raw Markdown views, or open the **Print** view for a formatted PDF-ready page.
+8. **Reset** — use the Reset button to clear all saved data, including the API key, from local storage.
+
+> All data (personal info, experience, education, API key) is persisted across page refreshes via Redux Persist + AES encryption. Nothing is sent to any third-party server except Google's Gemini API when you click Generate.
+
+---
+
+### Leveling Tool — Usage
+
+🔗 **[https://ankkiyy.com/tools/leveling](https://ankkiyy.com/tools/leveling)**
+
+The Leveling Tool turns your daily activity into a gamified skill tracker. It uses free-text **daily logs**, an AI model, and an XP system to keep you accountable.
+
+#### Getting Started
+
+1. Open the tool and navigate to the **Profile** tab.
+2. Enter your **username** and save — this creates your game profile.
+
+#### Managing Skills
+
+1. Go to the **Skills** tab.
+2. Click **Add Skill** and enter a skill name and category (e.g., "React", "Python", "Communication").
+3. Each skill starts at Level 1 with 20 XP.
+4. Skills are visualized as a tree with progress bars and level indicators (powered by Recharts).
+
+#### Writing Daily Logs (AI Skill Updates)
+
+1. Go to the **Daily Log** tab.
+2. Write a free-text description of what you did today. Be natural — mention the tools, languages, or activities you worked on. **Example:**
+   > "Today I built a new React component for the dashboard, fixed a bug in the Python backend, and spent an hour practicing my SQL queries."
+3. Click **Process Daily Log**.
+4. The tool sends your log to the configured AI model with a prompt asking it to identify which of your registered skills appear in the text.
+5. Skills that are matched receive **+XP** (default: +10 XP). Skills that are not mentioned receive a **penalty** (default: −20 XP, minimum 0).
+6. If you missed one or more full calendar days since your last log, **all skills are degraded** first, then today's update is applied.
+7. The processed log is saved to history with timestamps and a tag list of updated skills.
+
+#### Configuring the AI Model
+
+Go to the **Settings** tab to configure:
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| AI Model URL | `http://localhost:11434` | Ollama API endpoint or any compatible AI service |
+| Model Name | `llama2` | Model to use (e.g., `llama2`, `mistral`, `codellama`) |
+| Daily XP Gain | `10` | XP added to each worked-on skill per day |
+| Missed Day Penalty | `20` | XP subtracted from skills not mentioned (or when a day is skipped) |
+
+> **Fallback:** If the AI model is unreachable, the tool falls back to simple keyword matching — it checks whether any skill name appears literally in your log text.
+
+#### Real-Time Sync with WebRTC
+
+The tool supports two sync methods — both require no account or server storage for user data:
+
+**QR Code Sync (offline-friendly):**
+1. In your profile, generate an **Encrypted QR Code export**. You will be prompted to set a password.
+2. On the target device, use the **Scan QR** option and enter the same password to import your full profile state.
+
+**WebRTC P2P Sync (real-time):**
+1. Ensure **Peer Connection** is enabled in Settings.
+2. Both devices connect to the Socket.io signaling server (used only for initial handshake — no data is stored there).
+3. Once the WebRTC data channel is established, all profile data flows **directly between your browsers** in real time.
+4. Enable **Auto Sync** to broadcast every state change automatically to connected peers.
+
+#### Local Storage & Encryption Details
+
+| Layer | Technology | What Is Stored |
+|-------|-----------|----------------|
+| Redux Persist | AES encryption (`redux-persist-transform-encrypt`) | All tool state: profile, skills, daily logs, settings |
+| QR export payload | AES-GCM 256-bit, PBKDF2 key derivation (100 000 iterations), Web Crypto API | Full serialized Redux state, encrypted with user-supplied password |
+
+The encryption key for local storage persistence is controlled by the `VITE_ENCRYPTION_KEY` environment variable (see [Environment Variables](#environment-variables)).
 
 ---
 
@@ -282,3 +384,48 @@ The project is deployed automatically via **GitHub Actions**:
 2. On successful deployment, a notification is sent to **Discord**
 
 The live site is hosted at [ankkiyy.com](https://ankkiyy.com).
+
+---
+
+## AI Prompts Reference
+
+For the full documentation of all AI prompt templates, API key requirements, WebRTC sync details, local storage encryption, and skill extraction logic, see **[PROMPTS.md](./PROMPTS.md)**.
+
+### Quick Reference — Resume Generator Prompt
+
+```
+Create a complete, ATS-friendly resume by optimizing the provided experience and
+education data for the target job.
+
+Personal Information: {personalInfo}
+Experience Data:      {experienceData}
+Education Data:       {educationData}
+Job Description:      {jobDescription}
+Skills to Highlight:  {skills}
+
+Instructions:
+1. Create a compelling professional summary based on the experience and target job.
+2. Optimize experience descriptions to include relevant keywords from the job description.
+3. Organize skills by relevance to the job requirements.
+4. Ensure ATS-friendly formatting.
+5. Use STAR method for experience descriptions.
+6. Use metrics to quantify achievements (e.g., "Increased sales by 20%").
+
+Format Instructions: {format_instructions}
+```
+
+> 🔑 **Requires your own Google Gemini API key** — obtained free from [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) and entered in the tool UI. Never stored on any server.
+
+### Quick Reference — Leveling Tool Daily Log Prompt
+
+```
+Analyze the following daily log and identify which skills were worked on.
+Only return skill names that were actually mentioned or implied, separated by commas.
+Skills available: {skills}.
+
+Daily log: {sanitizedText}
+
+Skills worked on (comma-separated):
+```
+
+> Skills matched by the AI receive **+XP**; unmentioned skills receive a **penalty**. If the AI model is unavailable, a keyword-matching fallback is used automatically.
