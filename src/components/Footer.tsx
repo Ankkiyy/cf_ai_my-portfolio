@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Github, Mail, Youtube, Twitter } from 'lucide-react';
+import { Github, Mail, Youtube, Twitter, Linkedin, Code2, BookOpen } from 'lucide-react';
 
 const Footer = () => (
   <footer className="py-8 border-t border-border bg-background/80 backdrop-blur-md mt-12">
@@ -8,9 +8,9 @@ const Footer = () => (
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
         {/* Left side - Copyright and description */}
         <div className="flex flex-col gap-2">
-          <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} <span className="text-primary font-semibold">Ankkiyy</span>. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} <span className="text-primary font-semibold">Ankit Prajapati (Ankkiyy)</span>. All rights reserved.</p>
           <p className="text-xs text-muted-foreground max-w-xs">
-            <a href="https://youtube.com/@ankkiyy" target="_blank" rel="noopener" className="text-primary hover:underline">Ankkiyy</a> - Your trusted cybersecurity expert & digital creator
+            <a href="https://youtube.com/@ankkiyy" target="_blank" rel="noopener" className="text-primary hover:underline">Ankkiyy</a> is the public identity of Ankit Prajapati - cybersecurity expert and digital creator
           </p>
         </div>
 
@@ -66,6 +66,36 @@ const Footer = () => (
               <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
               <span>Email</span>
             </a>
+            <a
+              href="https://www.linkedin.com/in/ankkiyy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm hover:text-primary transition-colors group"
+              aria-label="LinkedIn ankkiyy"
+            >
+              <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href="https://dev.to/ankkiyy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm hover:text-primary transition-colors group"
+              aria-label="Dev.to ankkiyy"
+            >
+              <Code2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span>Dev.to</span>
+            </a>
+            <a
+              href="https://medium.com/@ankkiyy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm hover:text-primary transition-colors group"
+              aria-label="Medium ankkiyy"
+            >
+              <BookOpen className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span>Medium</span>
+            </a>
           </div>
         </div>
       </div>
@@ -73,8 +103,8 @@ const Footer = () => (
       {/* Bottom tagline with Ankkiyy branding */}
       <div className="border-t border-border/50 pt-6 text-center">
         <p className="text-xs text-muted-foreground">
-          Built by <a href="https://x.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">Ankkiyy</a> • 
-          <a href="https://youtube.com/@ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline ml-1">Cybersecurity Creator</a>
+          Built by <a href="https://x.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">Ankit Prajapati (Ankkiyy)</a> • 
+          <a href="https://www.linkedin.com/in/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline ml-1">Cybersecurity Creator</a>
         </p>
       </div>
     </div>

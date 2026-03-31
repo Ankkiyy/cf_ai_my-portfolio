@@ -665,6 +665,27 @@ export const socialLinks: SocialLink[] = [
     color: "#1DA1F2"
   },
   {
+    platform: "LinkedIn",
+    username: "ankkiyy",
+    url: "https://www.linkedin.com/in/ankkiyy",
+    icon: "Linkedin",
+    color: "#0A66C2"
+  },
+  {
+    platform: "Dev.to",
+    username: "ankkiyy",
+    url: "https://dev.to/ankkiyy",
+    icon: "Code2",
+    color: "#f97316"
+  },
+  {
+    platform: "Medium",
+    username: "ankkiyy",
+    url: "https://medium.com/@ankkiyy",
+    icon: "BookOpen",
+    color: "#a1a1aa"
+  },
+  {
     platform: "Email",
     username: "me@ankkiyy.com",
     url: "mailto:me@ankkiyy.com",

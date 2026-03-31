@@ -1,4 +1,4 @@
-import { Shield, Lock, Eye, Zap, ArrowRight, Download, Github, Youtube, Twitter, Mail } from 'lucide-react';
+import { Shield, Lock, Eye, Zap, ArrowRight, Download, Github, Youtube, Twitter, Mail, Linkedin, Code2, BookOpen } from 'lucide-react';
 import CyberAnimation6 from '../components/CyberAnimation6';
 import ContainedLoader6 from '../components/ContainedLoader6';
 
@@ -218,15 +218,15 @@ const Home = () => {
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent">
                 Connect with<br />
-                <span className="bg-gradient-to-r from-primary via-red-400 to-primary bg-clip-text text-transparent">Ankkiyy</span>
+                <span className="bg-gradient-to-r from-primary via-red-400 to-primary bg-clip-text text-transparent">Ankit Prajapati (Ankkiyy)</span>
               </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Follow <a href="https://x.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Ankkiyy</a> across all platforms for cybersecurity insights, content, and industry expertise
+                Follow <a href="https://x.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Ankkiyy</a> across all platforms to connect with Ankit Prajapati and get cybersecurity insights, content, and industry expertise
               </p>
             </div>
 
             {/* Social Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-12">
               {/* GitHub Card */}
               <a
                 href="https://github.com/ankkiyy"
@@ -300,15 +300,72 @@ const Home = () => {
                   </div>
                 </div>
               </a>
+
+              {/* LinkedIn Card */}
+              <a
+                href="https://www.linkedin.com/in/ankkiyy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 p-8 hover:border-sky-500/30 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-sky-500/10"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 to-sky-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative">
+                  <Linkedin className="w-12 h-12 text-sky-500 mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-xl font-bold mb-2">LinkedIn</h3>
+                  <p className="text-sm text-muted-foreground mb-4">@ankkiyy - Professional security updates</p>
+                  <div className="flex items-center text-sky-500 text-sm font-medium group-hover:gap-2 gap-0 transition-all">
+                    <span>Connect</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </a>
+
+              {/* Dev.to Card */}
+              <a
+                href="https://dev.to/ankkiyy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 p-8 hover:border-orange-500/30 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-orange-500/10"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative">
+                  <Code2 className="w-12 h-12 text-orange-500 mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-xl font-bold mb-2">Dev.to</h3>
+                  <p className="text-sm text-muted-foreground mb-4">@ankkiyy - Practical cybersecurity writeups</p>
+                  <div className="flex items-center text-orange-500 text-sm font-medium group-hover:gap-2 gap-0 transition-all">
+                    <span>Read</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </a>
+
+              {/* Medium Card */}
+              <a
+                href="https://medium.com/@ankkiyy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 p-8 hover:border-zinc-400/30 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-zinc-400/10"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-zinc-400/10 to-zinc-400/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative">
+                  <BookOpen className="w-12 h-12 text-zinc-300 mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-xl font-bold mb-2">Medium</h3>
+                  <p className="text-sm text-muted-foreground mb-4">@ankkiyy - Long-form security insights</p>
+                  <div className="flex items-center text-zinc-300 text-sm font-medium group-hover:gap-2 gap-0 transition-all">
+                    <span>Explore</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </a>
             </div>
 
             {/* Ankkiyy Branding Section */}
             <div className="bg-gradient-to-r from-primary/10 via-transparent to-red-500/10 border border-primary/20 rounded-2xl p-12 text-center">
               <p className="text-muted-foreground mb-4">
-                <strong className="text-primary text-lg">Ankkiyy</strong> is a recognized cybersecurity expert and digital creator dedicated to advancing security awareness and education
+                <strong className="text-primary text-lg">Ankit Prajapati (Ankkiyy)</strong> is a recognized cybersecurity expert and digital creator dedicated to advancing security awareness and education
               </p>
               <p className="text-sm text-muted-foreground">
-                Whether you're looking to follow <a href="https://youtube.com/@ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Ankkiyy on YouTube</a>, connect on <a href="https://x.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">X (Twitter)</a>, check out <a href="https://github.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Ankkiyy's GitHub</a>, or collaborate directly via email, we're here to help secure your digital future.
+                Whether you're looking to follow <a href="https://youtube.com/@ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Ankkiyy on YouTube</a>, connect on <a href="https://x.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">X (Twitter)</a>, network on <a href="https://www.linkedin.com/in/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">LinkedIn</a>, read posts on <a href="https://dev.to/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Dev.to</a> and <a href="https://medium.com/@ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Medium</a>, check out <a href="https://github.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Ankkiyy's GitHub</a>, or collaborate directly via email, you're connecting with Ankit Prajapati, the creator behind the Ankkiyy identity.
               </p>
             </div>
           </div>
@@ -320,10 +377,10 @@ const Home = () => {
           
           <div className="max-w-4xl mx-auto text-center relative">
             <h2 className="text-4xl md:text-5xl font-bold mb-8">
-              Ready to work with <span className="text-primary">Ankkiyy</span>?
+              Ready to work with <span className="text-primary">Ankit Prajapati (Ankkiyy)</span>?
             </h2>
             <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Join countless organizations that trust Ankkiyy for their cybersecurity needs
+              Join countless organizations that trust Ankit Prajapati, known as Ankkiyy, for their cybersecurity needs
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
