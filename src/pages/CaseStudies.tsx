@@ -25,16 +25,16 @@ const CaseStudies = () => {
             
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent">
-                Case
+                Ankkiyy's
               </span>
               <br />
               <span className="bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent">
-                Studies
+                Case Studies
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Real-world cybersecurity challenges and the strategic solutions that delivered measurable results for our clients.
+              Real-world cybersecurity challenges solved by <a href="/about" className="text-primary font-semibold hover:underline">Ankkiyy</a> with strategic solutions that delivered measurable results for our clients.
             </p>
           </div>
 

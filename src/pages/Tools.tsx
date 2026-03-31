@@ -37,16 +37,16 @@ const Tools = () => {
                 
                 <h1 className="text-5xl md:text-6xl font-bold mb-6">
                   <span className="bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent">
-                    Security
+                    Ankkiyy's
                   </span>
                   <br />
                   <span className="bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent">
-                    Tools
+                    Security Tools
                   </span>
                 </h1>
                 
                 <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                  Professional cybersecurity tools and utilities for penetration testing, security analysis, and threat detection.
+                  Professional cybersecurity tools and utilities by <a href="/about" className="text-primary font-semibold hover:underline">Ankkiyy</a> for penetration testing, security analysis, and threat detection.
                 </p>
               </div>
 

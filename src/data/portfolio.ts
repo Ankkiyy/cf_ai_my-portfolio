@@ -633,3 +633,42 @@ export const certificates: Certificate[] = [
     priority: 5 as const,
   },
 ].sort((a, b) => a.priority - b.priority);
+
+export interface SocialLink {
+  platform: string;
+  username: string;
+  url: string;
+  icon: string;
+  color?: string;
+}
+
+export const socialLinks: SocialLink[] = [
+  {
+    platform: "GitHub",
+    username: "ankkiyy",
+    url: "https://github.com/ankkiyy",
+    icon: "Github",
+    color: "#ffffff"
+  },
+  {
+    platform: "YouTube",
+    username: "ankkiyy",
+    url: "https://youtube.com/@ankkiyy",
+    icon: "Youtube",
+    color: "#ff0000"
+  },
+  {
+    platform: "X (Twitter)",
+    username: "ankkiyy",
+    url: "https://x.com/ankkiyy",
+    icon: "Twitter",
+    color: "#1DA1F2"
+  },
+  {
+    platform: "Email",
+    username: "me@ankkiyy.com",
+    url: "mailto:me@ankkiyy.com",
+    icon: "Mail",
+    color: "#4CAF50"
+  }
+];

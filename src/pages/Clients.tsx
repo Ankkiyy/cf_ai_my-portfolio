@@ -58,18 +58,16 @@ const Clients = () => {
 
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent">
-                My
+                Ankkiyy's
               </span>
               <br />
               <span className="bg-gradient-to-r from-primary via-green-400 to-primary bg-clip-text text-transparent">
-                Clients
+                Clients & Partners
               </span>
             </h1>
 
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Trusted by leading organizations across various industries to
-              secure their digital infrastructure and protect their most
-              valuable assets.
+              Trusted by leading organizations across various industries. <a href="/about" className="text-primary font-semibold hover:underline">Ankkiyy</a> secures digital infrastructure and protects valuable assets.
             </p>
           </div>
 

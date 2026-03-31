@@ -44,12 +44,12 @@ const Projects = () => {
               </span>
               <br />
               <span className="bg-gradient-to-r from-primary via-red-400 to-primary bg-clip-text text-transparent">
-                Projects
+                Projects by Ankkiyy
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Innovative cybersecurity solutions and tools developed to address modern security challenges and protect digital infrastructures.
+              Innovative cybersecurity solutions and tools developed by <a href="/about" className="text-primary font-semibold hover:underline">Ankkiyy</a> to address modern security challenges and protect digital infrastructures.
             </p>
           </div>
 
@@ -223,7 +223,7 @@ const Projects = () => {
 
           {/* Stats Section */}
           <div className="mt-24 pt-16 border-t border-border/50">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-16">
               {[
                 { value: projects.length, label: "Total Projects", icon: "🚀" },
                 { value: new Set(projects.flatMap(p => p.technologies)).size, label: "Technologies", icon: "⚡" },
@@ -240,6 +240,24 @@ const Projects = () => {
                   <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
                 </div>
               ))}
+            </div>
+
+            {/* Ankkiyy Projects Section */}
+            <div className="bg-gradient-to-r from-primary/10 to-red-500/10 border border-primary/20 rounded-2xl p-12 text-center">
+              <h2 className="text-3xl font-bold mb-4">All Projects by <span className="text-primary">Ankkiyy</span></h2>
+              <p className="text-muted-foreground mb-6 max-w-3xl mx-auto">
+                Each project showcases <a href="https://github.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Ankkiyy's</a> expertise in cybersecurity engineering and development. Check out more on <a href="https://github.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">GitHub</a> or follow <a href="https://x.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Ankkiyy on X</a> for updates.
+              </p>
+              <a
+                href="https://github.com/ankkiyy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all font-medium"
+              >
+                <Github className="w-5 h-5" />
+                Explore Ankkiyy on GitHub
+                <ArrowRight className="w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>

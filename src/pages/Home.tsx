@@ -1,4 +1,4 @@
-import { Shield, Lock, Eye, Zap, ArrowRight, Download, Github } from 'lucide-react';
+import { Shield, Lock, Eye, Zap, ArrowRight, Download, Github, Youtube, Twitter, Mail } from 'lucide-react';
 import CyberAnimation6 from '../components/CyberAnimation6';
 import ContainedLoader6 from '../components/ContainedLoader6';
 
@@ -208,12 +208,141 @@ const Home = () => {
               ))}
             </div>
 
-            {/* Call to action */}
-            <div className="text-center mt-20">
-              <div className="inline-flex items-center gap-4 px-8 py-4 bg-primary/10 border border-primary/20 rounded-full backdrop-blur-sm hover:bg-primary/20 transition-all duration-300 cursor-pointer group">
-                <span className="text-primary font-medium">Ready to secure your infrastructure?</span>
-                <ArrowRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" />
-              </div>
+        {/* Social Links & Creator Section */}
+        <section className="py-24 px-4 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
+          
+          <div className="max-w-7xl mx-auto relative">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent">
+                Connect with<br />
+                <span className="bg-gradient-to-r from-primary via-red-400 to-primary bg-clip-text text-transparent">Ankkiyy</span>
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Follow <a href="https://x.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Ankkiyy</a> across all platforms for cybersecurity insights, content, and industry expertise
+              </p>
+            </div>
+
+            {/* Social Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              {/* GitHub Card */}
+              <a
+                href="https://github.com/ankkiyy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 p-8 hover:border-primary/30 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-primary/10"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative">
+                  <Github className="w-12 h-12 text-primary mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-xl font-bold mb-2">GitHub</h3>
+                  <p className="text-sm text-muted-foreground mb-4">@ankkiyy - Open source projects & code</p>
+                  <div className="flex items-center text-primary text-sm font-medium group-hover:gap-2 gap-0 transition-all">
+                    <span>Visit</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </a>
+
+              {/* YouTube Card */}
+              <a
+                href="https://youtube.com/@ankkiyy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 p-8 hover:border-red-500/30 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-red-500/10"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative">
+                  <Youtube className="w-12 h-12 text-red-500 mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-xl font-bold mb-2">YouTube</h3>
+                  <p className="text-sm text-muted-foreground mb-4">@ankkiyy - Cybersecurity tutorials & content</p>
+                  <div className="flex items-center text-red-500 text-sm font-medium group-hover:gap-2 gap-0 transition-all">
+                    <span>Subscribe</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </a>
+
+              {/* X/Twitter Card */}
+              <a
+                href="https://x.com/ankkiyy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 p-8 hover:border-blue-400/30 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-blue-400/10"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 to-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative">
+                  <Twitter className="w-12 h-12 text-blue-400 mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-xl font-bold mb-2">X (Twitter)</h3>
+                  <p className="text-sm text-muted-foreground mb-4">@ankkiyy - Security insights & updates</p>
+                  <div className="flex items-center text-blue-400 text-sm font-medium group-hover:gap-2 gap-0 transition-all">
+                    <span>Follow</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </a>
+
+              {/* Email Card */}
+              <a
+                href="mailto:me@ankkiyy.com"
+                className="group relative overflow-hidden rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 p-8 hover:border-green-500/30 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-green-500/10"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative">
+                  <Mail className="w-12 h-12 text-green-500 mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-xl font-bold mb-2">Email</h3>
+                  <p className="text-sm text-muted-foreground mb-4">me@ankkiyy.com - Direct contact</p>
+                  <div className="flex items-center text-green-500 text-sm font-medium group-hover:gap-2 gap-0 transition-all">
+                    <span>Contact</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            {/* Ankkiyy Branding Section */}
+            <div className="bg-gradient-to-r from-primary/10 via-transparent to-red-500/10 border border-primary/20 rounded-2xl p-12 text-center">
+              <p className="text-muted-foreground mb-4">
+                <strong className="text-primary text-lg">Ankkiyy</strong> is a recognized cybersecurity expert and digital creator dedicated to advancing security awareness and education
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Whether you're looking to follow <a href="https://youtube.com/@ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Ankkiyy on YouTube</a>, connect on <a href="https://x.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">X (Twitter)</a>, check out <a href="https://github.com/ankkiyy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Ankkiyy's GitHub</a>, or collaborate directly via email, we're here to help secure your digital future.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Call-to-Action Section */}
+        <section className="py-32 px-4 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-primary/5 to-transparent" />
+          
+          <div className="max-w-4xl mx-auto text-center relative">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8">
+              Ready to work with <span className="text-primary">Ankkiyy</span>?
+            </h2>
+            <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+              Join countless organizations that trust Ankkiyy for their cybersecurity needs
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <a
+                href="https://github.com/ankkiyy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group px-8 py-4 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-all duration-300 cyber-glow flex items-center justify-center gap-3 font-medium transform hover:scale-105"
+              >
+                <Github className="w-5 h-5" />
+                Follow Ankkiyy on GitHub
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="https://x.com/ankkiyy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group px-8 py-4 border border-primary/30 text-primary rounded-xl hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 flex items-center justify-center gap-3 font-medium backdrop-blur-sm transform hover:scale-105"
+              >
+                <Twitter className="w-5 h-5" />
+                Follow Ankkiyy on X
+              </a>
             </div>
           </div>
         </section>

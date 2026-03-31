@@ -33,10 +33,10 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
+          <a href="/" className="flex items-center space-x-2 group">
             <Shield className="h-8 w-8 text-primary group-hover:animate-cyber-pulse" />
-            <span className="text-xl font-semibold">Ankit Prajapati</span>
-          </Link>
+            <span className="text-xl font-semibold bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">Ankkiyy</span>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
