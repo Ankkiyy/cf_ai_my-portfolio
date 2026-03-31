@@ -207,6 +207,8 @@ const Home = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
 
         {/* Social Links & Creator Section */}
         <section className="py-24 px-4 relative">
